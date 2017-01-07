@@ -50,6 +50,10 @@ namespace SelliT
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            // Serve static files (html, css, js, images)
+            app.UseStaticFiles();
+
+            // Add MVC to the pipeline
             app.UseMvc();
         }
     }

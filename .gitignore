@@ -278,3 +278,10 @@ __pycache__/
 
     © 2017 GitHub, Inc. Terms Privacy Security Status Help 
 
+/SelliT/src/SelliT/wwwroot/app
+/SelliT/src/SelliT/wwwroot/js/@angular
+/SelliT/src/SelliT/wwwroot/js/rxjs
+/SelliT/src/SelliT/wwwroot/js/Reflect.js
+/SelliT/src/SelliT/wwwroot/js/shim.min.js
+/SelliT/src/SelliT/wwwroot/js/system.src.js
+/SelliT/src/SelliT/wwwroot/js/zone.js
