@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace SelliT.Controllers
 {
     [Route("api/[controller]")]
-    public class InvoicesController : Controller
+    public class ContractorsController : Controller
     {
         #region RESTful Conventions
         /// GET api/invoices/
@@ -38,11 +38,12 @@ namespace SelliT.Controllers
         /// <summary>
         /// GET: api/items/GetLatest
         /// ROUTING TYPE: attribute-based
-        /// Returns: An array of a default number of Json-serialized objects representing the last inserted items.
+        /// Returns An array of a default number of Json-serialized objects representing the last inserted items.
+        
         [HttpGet("GetLatest")]
         public IActionResult GetLatest()
         {
-            return GetLatest(DefaultNumberOfIvoices);
+            return GetLatest(DefaultNumberOfItems);
         }
 
         /// GET: api/items/GetLatest/{n}
@@ -51,7 +52,7 @@ namespace SelliT.Controllers
         [HttpGet("GetLatest/{n}")]
         public IActionResult GetLatest(int n)
         {
-            if (n > MaxNumberOfInvoices) n = MaxNumberOfInvoices;
+            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
             var items = GetSampleItems().OrderByDescending(i => i.CreateDate).Take(n);
             return new JsonResult(items, DefaultJsonSettings);
         }
@@ -62,24 +63,20 @@ namespace SelliT.Controllers
         /// Generate a sample array of source Items to emulate a database (for testing purposes only).
         /// Param:  name="num" The number of items to generate: default is 100
         /// Returns: a defined number of mock items (for testing purpose only)
-        private List<InvoiceViewModel> GetSampleItems(int num = 100)
+        private List<ContractorViewModel> GetSampleItems(int num = 100)
         {
-            List<InvoiceViewModel> list = new List<InvoiceViewModel>();
+            List<ContractorViewModel> list = new List<ContractorViewModel>();
             DateTime date = new DateTime(2017, 01, 07).AddDays(-num);
             for (int id = 1; id <= num; id++)
             {
                 date = date.AddDays(1);
-                list.Add(new InvoiceViewModel()
+                list.Add(new ContractorViewModel()
                 {
                     Id = id,
-                    BuyerName = String.Format("Invoice {0} BuyerName", id),
-                    BuyerAddress = String.Format("Invoice {0} BuyerAddress", id),
-                    BuyerNip = String.Format("{0}00-000-00-00", id),
-                    SellerName = String.Format("Invoice {0} BuyerName", id),
-                    SellerAddress = String.Format("Invoice {0} BuyerAddress", id),
-                    SellerNip = String.Format("{0}00-000-00-00", id),
-                    Description = String.Format("Invoice {0} Description", id),
-                    PayForm = "gotówka"
+                    Name = String.Format("Contractor {0} Name", id),
+                    Address = String.Format("Contractor {0} Address", id),
+                    Nip = String.Format("{0}00-000-00-00", id),
+                    CreateDate = date
                 });
             }
             return list;
@@ -98,7 +95,7 @@ namespace SelliT.Controllers
         }
 
         /// Returns the default number of invoices to retrieve when using the parameterless overloads of the API methods retrieving item lists.
-        private int DefaultNumberOfIvoices
+        private int DefaultNumberOfItems
         {
             get
             {
@@ -107,7 +104,7 @@ namespace SelliT.Controllers
         }
 
         /// Returns the maximum number using the API methods retrieving item lists.
-        private int MaxNumberOfInvoices
+        private int MaxNumberOfItems
         {
             get
             {
@@ -116,32 +113,6 @@ namespace SelliT.Controllers
         }
         #endregion
 
-        #region GetLatestOld/{num}
-        /// Old GetLatest method
-        /// GET api/invoices/GetLatestOd/{n}
-        /// Returns: An array of {n} Json-serialized objects representingthe last inserted items.</returns> 
-        [HttpGet("GetLatestOld/{num}")]
-        public JsonResult GetLatestOld(int num)
-        {
-            var array = new List<InvoiceViewModel>();
-            for (int i = 1; i <= num; i++) array.Add(new InvoiceViewModel()
-            {
-                Id = i,
-                BuyerName = String.Format("Invoice {0} BuyerName", i),
-                BuyerAddress = String.Format("Invoice {0} BuyerAddress", i),
-                BuyerNip = String.Format("{0}00-000-00-00", i),
-                SellerName = String.Format("Invoice {0} BuyerName", i),
-                SellerAddress = String.Format("Invoice {0} BuyerAddress", i),
-                SellerNip = String.Format("{0}00-000-00-00", i),
-                Description = String.Format("Invoice {0} Description", i),
-                PayForm = "gotówka"
-            });
-            var settings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented
-            };
-            return new JsonResult(array, settings);
-        }
-        #endregion
+
     }
 }
