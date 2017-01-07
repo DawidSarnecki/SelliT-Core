@@ -1,1 +1,3 @@
 # SelliT-Core
+
+copyright DawidSarnecki
