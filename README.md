@@ -10,7 +10,6 @@ Resolved Issues:
 * Angular components
 * Authentication using JSON Web Token
 
-
 Bibliography:
 
 1. 'ASP.NET Core and Angular 2', Valerio De Sanctis, October 2016, Packt Publishing Ltd, https://www.packtpub.com/application-development/aspnet-core-and-angular-2
