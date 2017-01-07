@@ -26,7 +26,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             AppComponent = __decorate([
                 core_1.Component({
                     selector: "invoicelist",
-                    template: "<h1>InvoiceList</h1><div>Loading, give as a while...</div>"
+                    template: "<h1>InvoiceList</h1><div>Loading, give us a while...</div>"
                 }),
                 __metadata("design:paramtypes", [])
             ], AppComponent);

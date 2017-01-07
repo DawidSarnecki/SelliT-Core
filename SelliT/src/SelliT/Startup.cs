@@ -21,7 +21,7 @@ namespace SelliT
 
             if (env.IsEnvironment("Development"))
             {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
+                // This will push telemetry data through Application Insights pipeline faster, allowing results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
@@ -52,6 +52,20 @@ namespace SelliT
 
             // Serve static files (html, css, js, images)
             app.UseStaticFiles();
+
+            /*
+             //Caching issues 
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = (context) =>
+                {
+                    // Disable caching for all static files.
+                    context.Context.Response.Headers["Cache-Control"] = "no-cache, no-store";
+                context.Context.Response.Headers["Pragma"] = "no-cache";
+                    context.Context.Response.Headers["Expires"] = "-1";
+                }
+            });
+            */
 
             // Add MVC to the pipeline
             app.UseMvc();
