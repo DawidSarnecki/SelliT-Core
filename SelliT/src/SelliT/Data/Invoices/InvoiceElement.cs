@@ -9,10 +9,10 @@ using SelliT.Data.Contractors;
 namespace SelliT.Data.Invoices
 {
 
-    public class Position
+    public class InvoiceElement
     {
         #region Constructor
-        public Position()
+        public InvoiceElement()
         {
         }
         #endregion

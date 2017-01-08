@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using SelliT.Data.Invoices;
 
 namespace SelliT.Data.Contractors
 {
@@ -47,6 +48,9 @@ namespace SelliT.Data.Contractors
         public DateTime RemoveDate { get; set; }
         #endregion
 
-
-    }
+        #region Related Properties
+        /// A list of ivoice wrote where this contractor is a seller or byer
+        // public virtual List<Invoice> Invoice { get; set; }
+        #endregion Related Properties
+}
 }

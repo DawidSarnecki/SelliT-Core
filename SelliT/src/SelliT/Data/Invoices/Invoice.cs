@@ -63,8 +63,8 @@ namespace SelliT.Data.Invoices
         [ForeignKey("BuyerID")]
         public virtual Contractor Buyer { get; set; }
         
-        /// Current Invoice's Position list: this property will be loaded on first use using EF's Lazy-Loading feature.
-        public virtual List<Position> Positions { get; set; }
+        /// Current Invoice's InvoiceElement list: this property will be loaded on first use using EF's Lazy-Loading feature.
+        public virtual List<InvoiceElement> InvoiceElements { get; set; }
         #endregion
 
     }
