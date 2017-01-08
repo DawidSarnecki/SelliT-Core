@@ -1,11 +1,12 @@
 # SelliT-Core
 An ivnoicinig app ( ASP.NET Core, Web API, SPA using Angular2 )
+
 Copyright DawidSarnecki, all rights reserved.
 
 Resolved Issues:
 
 * Routing
-* Data model using Entity Framework 6
+* Data model using Entity Framework Core
 * Web API controllers
 * Angular components
 * Authentication using JSON Web Token
