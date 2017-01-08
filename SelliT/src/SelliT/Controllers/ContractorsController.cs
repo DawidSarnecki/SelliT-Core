@@ -26,10 +26,10 @@ namespace SelliT.Controllers
         }
         #endregion Constructor
 
-       
+
 
         #region RESTful Conventions
-        /// GET api/invoices/
+        /// GET api/constructors/
         /// Returns: Nothing: this method will raise a HttpNotFound HTTP exception
         [HttpGet()]
         public IActionResult Get()
@@ -37,7 +37,7 @@ namespace SelliT.Controllers
             return NotFound(new { Error = "not found" });
         }
 
-        /// GET: api/items/{id}
+        /// GET: api/constructors/{id}
         /// ROUTING TYPE: attribute-based
         /// Return: A Json-serialized object representing a single item.
         [HttpGet("{id}")]
@@ -46,17 +46,22 @@ namespace SelliT.Controllers
             var contractor = DbContext.Contractor.Where(c => c.Id == id).FirstOrDefault();
             return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
         }
-        #endregion
+        #endregion RESTful Conventions
 
 
         #region Attribute-based Routing
-
+        /// GET: api/constructors/GetLatest
+        /// ROUTING TYPE: attribute-based
+        /// Returns An array of a default number of Json-serialized objects representing the last inserted items.
         [HttpGet("GetLatest")]
         public IActionResult GetLatest()
         {
-            return GetLatestOld(DefaultNumberOfItems);
+            return GetLatest(DefaultNumberOfItems);
         }
 
+        /// GET: api/constructors/GetLatest/{n}
+        /// ROUTING TYPE: attribute-based
+        /// Returns An array of {n} Json-serialized objects representing the last inserted items.
         [HttpGet("GetLatest/{n}")]
         public IActionResult GetLatest(int n)
         {
@@ -64,30 +69,7 @@ namespace SelliT.Controllers
             var contracors = DbContext.Contractor.OrderByDescending(i => i.CreateDate).Take(n).ToArray();
             return new JsonResult(ToContractorViewModelList(contracors), DefaultJsonSettings);
         }
-
-
-        /// <summary>
-        /// GET: api/items/GetLatest
-        /// ROUTING TYPE: attribute-based
-        /// Returns An array of a default number of Json-serialized objects representing the last inserted items.
-        /// 
-        [HttpGet("GetLatestOld")]
-        public IActionResult GetLatestOld()
-        {
-            return GetLatestOld(DefaultNumberOfItems);
-        }
-
-        /// GET: api/items/GetLatest/{n}
-        /// ROUTING TYPE: attribute-based
-        /// Returns An array of {n} Json-serialized objects representing the last inserted items.
-        [HttpGet("GetLatestOld/{n}")]
-        public IActionResult GetLatestOld(int n)
-        {
-            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderByDescending(i => i.CreateDate).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
-        }
-        #endregion
+        #endregion Attribute-based Routing
 
 
         #region Private Members
@@ -101,27 +83,6 @@ namespace SelliT.Controllers
                 lst.Add(TinyMapper.Map<ContractorViewModel>(i));
             return lst;
         } 
-
-        /// Generate a sample array of source Items to emulate a database (for testing purposes only).
-        /// Param:  name="num" The number of items to generate: default is 100
-        /// Returns: a defined number of mock items (for testing purpose only)
-        private List<ContractorViewModel> GetSampleItems(int num = 100)
-        {
-            List<ContractorViewModel> list = new List<ContractorViewModel>();
-            DateTime date = new DateTime(2017, 01, 07).AddDays(-num);
-            for (int id = 1; id <= num; id++)
-            {
-                date = date.AddDays(1);
-                list.Add(new ContractorViewModel()
-                {
-                    Id = id,
-                    Name = String.Format("Contractor {0} Name", id),
-                    Nip = String.Format("{0}00-000-00-00", id),
-                    CreateDate = date
-                });
-            }
-            return list;
-        }
 
         /// Returns a suitable JsonSerializerSettings object that can be used to generate the JsonResult return value for this Controller's methods.
         private JsonSerializerSettings DefaultJsonSettings
@@ -152,7 +113,7 @@ namespace SelliT.Controllers
                 return 5;
             }
         }
-        #endregion
+        #endregion Private Members
 
 
     }
