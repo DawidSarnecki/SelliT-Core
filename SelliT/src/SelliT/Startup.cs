@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using SelliT.Data;
 
 namespace SelliT
 {
@@ -38,6 +41,10 @@ namespace SelliT
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            // Add EntityFramework's Identity support.services.AddEntityFramework();
+            // Add AppDbContext.
+            services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]) );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
