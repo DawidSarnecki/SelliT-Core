@@ -198,5 +198,8 @@
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Contractors\Contractor.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Invoices\Invoice.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Invoices\InvoiceElement.cs"
+"D:\MVC NET\SelliTCore\SelliT\src\SelliT\Migrations\20170108165715_InitialCreate.cs"
+"D:\MVC NET\SelliTCore\SelliT\src\SelliT\Migrations\20170108165715_InitialCreate.Designer.cs"
+"D:\MVC NET\SelliTCore\SelliT\src\SelliT\Migrations\AppDbContextModelSnapshot.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\ContractorViewModel.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\InvoiceViewModel.cs"
