@@ -35,7 +35,6 @@ namespace SelliT.Data.Invoices
         [DefaultValue(1)]
         public int SellerID { get; set; }
         [Required]
-        [DefaultValue(1)]
         public int BuyerID { get; set; }
         [DefaultValue(1)]
         public PayForm PayForm { get; set; } 
@@ -59,8 +58,8 @@ namespace SelliT.Data.Invoices
 
         #region Related Properties
         /// Buyer: this properties will be loaded on first use using EF's Lazy-Loading feature
-        [ForeignKey("BuyerID")]
-        public virtual Contractor Buyer { get; set; }
+        //[ForeignKey("BuyerID")]
+        //public virtual Contractor Buyer { get; set; }
         
         /// Current Invoice's InvoiceElement list: this property will be loaded on first use using EF's Lazy-Loading feature.
         public virtual List<InvoiceElement> InvoiceElements { get; set; }

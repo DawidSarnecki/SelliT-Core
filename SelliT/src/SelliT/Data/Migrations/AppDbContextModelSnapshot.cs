@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SelliT.Data;
 
-namespace SelliT.Migrations
+namespace SelliT.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -89,8 +89,6 @@ namespace SelliT.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuyerID");
-
                     b.ToTable("Invoice");
                 });
 
@@ -101,8 +99,7 @@ namespace SelliT.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("InvoiceId")
-                        .IsRequired();
+                    b.Property<int>("InvoiceId");
 
                     b.Property<int?>("InvoiceIdID");
 
@@ -128,14 +125,6 @@ namespace SelliT.Migrations
                     b.HasIndex("InvoiceIdID");
 
                     b.ToTable("InvoiceElement");
-                });
-
-            modelBuilder.Entity("SelliT.Data.Invoices.Invoice", b =>
-                {
-                    b.HasOne("SelliT.Data.Contractors.Contractor", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SelliT.Data.Invoices.InvoiceElement", b =>

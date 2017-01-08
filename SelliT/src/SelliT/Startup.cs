@@ -61,7 +61,7 @@ namespace SelliT
             // Serve static files (html, css, js, images)
             app.UseStaticFiles();
 
-            //DbInitializer.Initialize(context);
+            DbInitializer.Initialize(context);
 
             /*
              //Caching issues 

@@ -203,8 +203,8 @@ D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Dbinitializer.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Contractors\Contractor.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Invoices\Invoice.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Invoices\InvoiceElement.cs
-D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Migrations\20170108195435_Initial.cs
-D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Migrations\20170108195435_Initial.Designer.cs
+D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Migrations\20170108205047_Initial4.cs
+D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Migrations\20170108205047_Initial4.Designer.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\Migrations\AppDbContextModelSnapshot.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\ContractorViewModel.cs
 D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\InvoiceViewModel.cs

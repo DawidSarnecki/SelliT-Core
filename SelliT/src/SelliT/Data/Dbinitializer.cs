@@ -13,6 +13,7 @@ namespace SelliT.Data
     {
         public static void Initialize(AppDbContext context)
         {
+            
             // Look for any Contractors.
             if (context.Contractor.Any())
             {
@@ -78,13 +79,13 @@ namespace SelliT.Data
             }
             context.SaveChanges();
 
-            /*
+            
 
             var invoicElements = new InvoiceElement[]
             {
                 new InvoiceElement
                 {
-                    InvoiceId = "1",
+                    InvoiceId = 1,
                     Quantity = 10,
                     Unit = "szt",
                     Price = 15,
@@ -96,7 +97,7 @@ namespace SelliT.Data
                 },
                 new InvoiceElement
                 {
-                    InvoiceId = "1",
+                    InvoiceId = 1,
                     Quantity = 10,
                     Unit = "szt",
                     Price = 15,
@@ -108,7 +109,7 @@ namespace SelliT.Data
                 },
                 new InvoiceElement
                 {
-                    InvoiceId = "2",
+                    InvoiceId = 2,
                     Quantity = 10,
                     Unit = "szt",
                     Price = 15,
@@ -120,7 +121,7 @@ namespace SelliT.Data
                 },
                 new InvoiceElement
                 {
-                    InvoiceId = "3",
+                    InvoiceId = 3,
                     Quantity = 10,
                     Unit = "szt",
                     Price = 15,
@@ -137,15 +138,15 @@ namespace SelliT.Data
                 context.InvoiceElement.Add(i);
             }
             context.SaveChanges();
-            */
-
+            
+          
+            
             var invoices = new Invoice[]
             {
                 new Invoice
                 {
                     Number = "2015/A/55555",
-                    SellerID = contractors.Single(s => s.IsSeller == true).Id,
-                    BuyerID = contractors.SingleOrDefault(s=> s.IsSeller == false).Id,
+                    BuyerID = 2,
                     PayForm = PayForm.gotówka,
                     totalToPay = 10,
                     CreateDate = DateTime.Now,
@@ -156,8 +157,7 @@ namespace SelliT.Data
                  new Invoice
                 {
                     Number = "2/A/55555",
-                    SellerID = contractors.Single(s => s.IsSeller == true).Id,
-                    BuyerID = contractors.SingleOrDefault(s=> s.IsSeller == false).Id,
+                    BuyerID =3,
                     PayForm = PayForm.karta,
                     totalToPay = 1000,
                     CreateDate = DateTime.Now,
@@ -168,8 +168,7 @@ namespace SelliT.Data
                   new Invoice
                 {
                     Number = "5/A/55555",
-                    SellerID = contractors.Single(s => s.IsSeller == true).Id,
-                    BuyerID = contractors.SingleOrDefault(s=> s.IsSeller == false).Id,
+                    BuyerID = 3,
                     PayForm = PayForm.karta,
                     totalToPay = 100000,
                     CreateDate = DateTime.Now,
@@ -180,8 +179,7 @@ namespace SelliT.Data
                   new Invoice
                 {
                     Number = "1505/A/55555",
-                    SellerID = contractors.Single(s => s.IsSeller == true).Id,
-                    BuyerID = contractors.SingleOrDefault(s=> s.IsSeller == false).Id,
+                    BuyerID = 4,
                     PayForm = PayForm.karta,
                     totalToPay = 1000,
                     CreateDate = DateTime.Now,
@@ -190,14 +188,17 @@ namespace SelliT.Data
                     ModifyDate = DateTime.Now
                 }
             };
-
+           
             foreach (Invoice i in invoices)
             {
                 context.Invoice.Add(i);
-            }
+            
             context.SaveChanges(); 
+            
+            }
         }
-              
+
+
     }
           
 }
