@@ -15,7 +15,7 @@ Bibliography:
 
 2. 'Getting started with ASP.NET Core MVC and Entity Framework Core using Visual Studio', Tom Dykstra and Rick Anderson , October 2016, https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
 
-3 'Getting Started with Entity Framework 6 Code First using MVC 5',Tom Dykstra, Rick Andersonlas, October 2015, https://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+3. 'Getting Started with Entity Framework 6 Code First using MVC 5',Tom Dykstra, Rick Andersonlas, October 2015, https://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
 
 4. 'ASP.NET MVC 5. Zaawansowane programowanie', Adam Freeman, Helion 2015
 
