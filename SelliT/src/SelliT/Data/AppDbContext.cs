@@ -32,15 +32,18 @@ namespace SelliT.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Contractor>().ToTable("Contractor");
             modelBuilder.Entity<Contractor>().Property(c => c.Id).ValueGeneratedOnAdd();
+
        
             modelBuilder.Entity<Invoice>().ToTable("Invoice");
             modelBuilder.Entity<Invoice>().Property(i => i.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Invoice>().HasMany(i => i.InvoiceElements).WithOne(c => c.Invoice).HasForeignKey(k => k.InvoiceId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Invoice>().HasMany(i => i.InvoiceElements).WithOne(c => c.Invoice).HasForeignKey(k => k.InvoiceId).OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<InvoiceElement>().ToTable("InvoiceElement");
             modelBuilder.Entity<InvoiceElement>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<InvoiceElement>().HasOne(e => e.Invoice);        }
+            //modelBuilder.Entity<InvoiceElement>().HasOne(e => e.Invoice);
+        }
         #endregion Methods
+
 
     }
 }
