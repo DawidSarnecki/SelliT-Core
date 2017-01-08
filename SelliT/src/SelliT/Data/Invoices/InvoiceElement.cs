@@ -22,7 +22,7 @@ namespace SelliT.Data.Invoices
         [Required]
         public int Id { get; set; }
         [Required]
-        public string InvoiceId { get; set; }
+        public int InvoiceId { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
@@ -30,11 +30,11 @@ namespace SelliT.Data.Invoices
         [Required]
         public double Price { get; set; }
         [Required]
-        public double value { get;}
+        public double value { get; set; }
         [Required]
         public double Vat { get; set; }
         [Required]
-        public double VatValue { get;}
+        public double VatValue { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
         [Required]

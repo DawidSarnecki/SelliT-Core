@@ -74,7 +74,6 @@ namespace SelliT.Controllers
                 {
                     Id = id,
                     Name = String.Format("Contractor {0} Name", id),
-                    Address = String.Format("Contractor {0} Address", id),
                     Nip = String.Format("{0}00-000-00-00", id),
                     CreateDate = date
                 });

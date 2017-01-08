@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SelliT.Data;
 
-namespace SelliT.Migrations
+namespace SelliT.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20170108165715_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20170108195435_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,8 +22,7 @@ namespace SelliT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApartmentNumber")
-                        .IsRequired();
+                    b.Property<string>("ApartmentNumber");
 
                     b.Property<string>("City")
                         .IsRequired();
@@ -93,8 +92,6 @@ namespace SelliT.Migrations
 
                     b.HasIndex("BuyerID");
 
-                    b.HasIndex("SellerID");
-
                     b.ToTable("Invoice");
                 });
 
@@ -123,6 +120,10 @@ namespace SelliT.Migrations
 
                     b.Property<double>("Vat");
 
+                    b.Property<double>("VatValue");
+
+                    b.Property<double>("value");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InvoiceIdID");
@@ -135,11 +136,6 @@ namespace SelliT.Migrations
                     b.HasOne("SelliT.Data.Contractors.Contractor", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SelliT.Data.Contractors.Contractor", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

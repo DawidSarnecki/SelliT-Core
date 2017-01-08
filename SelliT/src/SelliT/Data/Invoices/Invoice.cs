@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using SelliT.Data.Contractors;
 
+
 namespace SelliT.Data.Invoices
 {
     public enum PayForm
@@ -57,9 +58,7 @@ namespace SelliT.Data.Invoices
         #endregion
 
         #region Related Properties
-        ///Seller, Buyer: this properties will be loaded on first use using EF's Lazy-Loading feature.
-        [ForeignKey("SellerID")]
-        public virtual Contractor Seller { get; set; }
+        /// Buyer: this properties will be loaded on first use using EF's Lazy-Loading feature
         [ForeignKey("BuyerID")]
         public virtual Contractor Buyer { get; set; }
         

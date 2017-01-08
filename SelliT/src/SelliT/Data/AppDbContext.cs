@@ -20,7 +20,7 @@ namespace SelliT.Data
         #endregion Constructor
 
         #region Properties
-        public DbSet<Contractor> Items { get; set; }
+        public DbSet<Contractor> Contractor { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
         public DbSet<InvoiceElement> InvoiceElement { get; set; }
         #endregion Properties

@@ -30,7 +30,7 @@ namespace SelliT.Data.Contractors
         public string Street { get; set; }
         [Required]
         public string Number { get; set; }
-        [Required]
+        [DefaultValue("")]
         public string ApartmentNumber { get; set; }
         [Required]
         public string ZipCode { get; set; }
