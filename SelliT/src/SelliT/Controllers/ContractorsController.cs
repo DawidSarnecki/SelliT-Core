@@ -5,12 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SelliT.ViewModels;
 using Newtonsoft.Json;
+using SelliT.Data;
+using SelliT.Data.Contractors;
+using Nelibur.ObjectMapper;
 
 namespace SelliT.Controllers
 {
     [Route("api/[controller]")]
     public class ContractorsController : Controller
     {
+        #region Private Fields
+        private AppDbContext DbContext;
+        #endregion Private Fields
+        
+        #region Constructor
+        public ContractorsController(AppDbContext context)
+        {
+            // Dependency Injetion
+            DbContext = context;
+        }
+        #endregion Constructor
+
+       
+
         #region RESTful Conventions
         /// GET api/invoices/
         /// Returns: Nothing: this method will raise a HttpNotFound HTTP exception
@@ -26,31 +43,45 @@ namespace SelliT.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return new JsonResult(GetSampleItems()
-                .Where(i => i.Id == id)
-                .FirstOrDefault(),
-                DefaultJsonSettings);
+            var contractor = DbContext.Contractor.Where(c => c.Id == id).FirstOrDefault();
+            return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
         }
         #endregion
 
 
         #region Attribute-based Routing
+
+        [HttpGet("GetLatest")]
+        public IActionResult GetLatest()
+        {
+            return GetLatestOld(DefaultNumberOfItems);
+        }
+
+        [HttpGet("GetLatest/{n}")]
+        public IActionResult GetLatest(int n)
+        {
+            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
+            var contracors = DbContext.Contractor.OrderByDescending(i => i.CreateDate).Take(n).ToArray();
+            return new JsonResult(ToContractorViewModelList(contracors), DefaultJsonSettings);
+        }
+
+
         /// <summary>
         /// GET: api/items/GetLatest
         /// ROUTING TYPE: attribute-based
         /// Returns An array of a default number of Json-serialized objects representing the last inserted items.
-        
-        [HttpGet("GetLatest")]
-        public IActionResult GetLatest()
+        /// 
+        [HttpGet("GetLatestOld")]
+        public IActionResult GetLatestOld()
         {
-            return GetLatest(DefaultNumberOfItems);
+            return GetLatestOld(DefaultNumberOfItems);
         }
 
         /// GET: api/items/GetLatest/{n}
         /// ROUTING TYPE: attribute-based
         /// Returns An array of {n} Json-serialized objects representing the last inserted items.
-        [HttpGet("GetLatest/{n}")]
-        public IActionResult GetLatest(int n)
+        [HttpGet("GetLatestOld/{n}")]
+        public IActionResult GetLatestOld(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
             var items = GetSampleItems().OrderByDescending(i => i.CreateDate).Take(n);
@@ -60,6 +91,17 @@ namespace SelliT.Controllers
 
 
         #region Private Members
+        /// Maps a collection of Item entities into a list of ItemViewModel objects.
+        /// param name="items": An IEnumerable collection of item entities
+        /// Returns a mapped list of ContractorViewModel objects
+        private List<ContractorViewModel> ToContractorViewModelList(IEnumerable<Contractor> contracors)
+        {
+            var lst = new List<ContractorViewModel>();
+            foreach (var i in contracors)
+                lst.Add(TinyMapper.Map<ContractorViewModel>(i));
+            return lst;
+        } 
+
         /// Generate a sample array of source Items to emulate a database (for testing purposes only).
         /// Param:  name="num" The number of items to generate: default is 100
         /// Returns: a defined number of mock items (for testing purpose only)
@@ -98,7 +140,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 5;
+                return 3;
             }
         }
 
@@ -107,7 +149,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 100;
+                return 5;
             }
         }
         #endregion

@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using SelliT.Data;
+using Nelibur.ObjectMapper;
+using SelliT.Data.Contractors;
+using SelliT.ViewModels;
 
 namespace SelliT
 {
@@ -62,6 +65,10 @@ namespace SelliT
             app.UseStaticFiles();
 
             DbInitializer.Initialize(context);
+
+
+            // TinyMapper binding configuration
+            TinyMapper.Bind<Contractor, ContractorViewModel>();
 
             /*
              //Caching issues 
