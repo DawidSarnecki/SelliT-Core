@@ -207,6 +207,8 @@
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\20170109182101_ChangedNameType.Designer.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\20170109191347_ChangedIDType.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\20170109191347_ChangedIDType.Designer.cs"
+"D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\20170109204024_ContractorIDType.cs"
+"D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\20170109204024_ContractorIDType.Designer.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\Data\_Migrations\SellitContextModelSnapshot.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\ContractorViewModel.cs"
 "D:\MVC NET\SelliTCore\SelliT\src\SelliT\ViewModels\InvoiceViewModel.cs"

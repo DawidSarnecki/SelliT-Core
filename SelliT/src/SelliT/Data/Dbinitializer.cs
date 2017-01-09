@@ -13,52 +13,23 @@ namespace SelliT.Data
 {
     public static class DbInitializer
     {
+
         public static void Initialize(SellitContext context)
         {
 
             // Look for any Contractors.
-            if (context.Contractor.Any())
+            if (context.InvoiceElement.Any())
             {
                 return;   // DB has been seeded
             }
 
-
-            var num = 20;  // create 20 sample contractors
-            var contractors = new List<Contractor>();
-            for (int id = 1; id <= num; id++)
+            #region New Contractors
+            var contractors = new Contractor[]
             {
-                contractors.Add(GetSampleContractor(num - 1));
-            }
-            foreach (var item in contractors)
-            {
-                context.Contractor.Add(item);
-            }
-
-            // create 20 sample products
-            for (int id = 1; id <= num; id++)
-            {
-                context.Product.Add(GetSampleProduct(num - id));
-                
-            }
-        }
-
-        private static Product GetSampleProduct(int number)
-            {
-                return new Product()
+                new Contractor
                 {
                     ID = Guid.NewGuid().ToString(),
-                    Name = String.Format("Product {0} Name", number),
-                    Price = 100+2*number,
-                    CreateDate = DateTime.Now
-                };
-            }
-
-            private static Contractor GetSampleContractor(int number)
-            {
-                return new Contractor()
-                {
-                    ID = Guid.NewGuid().ToString(),
-                    Name = String.Format("Contractor {0} Name", number),
+                    Name = String.Format("ContractorName"),
                     Nip = "000-000-00-00",
                     Street = "Kowalska",
                     Number = "15A",
@@ -66,140 +37,198 @@ namespace SelliT.Data
                     City = "Sopot",
                     PersonToInvoice = "Kowalska J.",
                     CreateDate = DateTime.Now
-                };
-            }
-
-       
-        /*
-
-
-                var invoicElements = new InvoiceElement[]
+                },
+                new Contractor
                 {
-                    new InvoiceElement
-                    {
-                        InvoiceId = 1,
-                        Quantity = 10,
-                        Unit = "szt",
-                        Price = 15,
-                        value = 150,
-                        Vat = 23,
-                        VatValue = 517.5,
-                        CreateDate =DateTime.Now,
-                        ModifyDate =DateTime.Now
-                    },
-                    new InvoiceElement
-                    {
-                        InvoiceId = 1,
-                        Quantity = 10,
-                        Unit = "szt",
-                        Price = 15,
-                        value = 150,
-                        Vat = 23,
-                        VatValue = 517.5,
-                        CreateDate =DateTime.Now,
-                        ModifyDate =DateTime.Now
-                    },
-                    new InvoiceElement
-                    {
-                        InvoiceId = 2,
-                        Quantity = 10,
-                        Unit = "szt",
-                        Price = 15,
-                        value = 150,
-                        Vat = 23,
-                        VatValue = 517.5,
-                        CreateDate =DateTime.Now,
-                        ModifyDate =DateTime.Now
-                    },
-                    new InvoiceElement
-                    {
-                        InvoiceId = 3,
-                        Quantity = 10,
-                        Unit = "szt",
-                        Price = 15,
-                        value = 150,
-                        Vat = 23,
-                        VatValue = 517.5,
-                        CreateDate =DateTime.Now,
-                        ModifyDate =DateTime.Now
-                    }
-                };
-
-                foreach (InvoiceElement i in invoicElements)
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("ContractorNam"),
+                    Nip = "000-000-00-00",
+                    Street = "Kowalska",
+                    Number = "15A",
+                    ZipCode = "15-150",
+                    City = "Sopot",
+                    PersonToInvoice = "Kowalska J.",
+                    CreateDate = DateTime.Now
+                },
+                new Contractor
                 {
-                    context.InvoiceElement.Add(i);
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("ContractorN"),
+                    Nip = "000-000-00-00",
+                    Street = "Kowalska",
+                    Number = "15A",
+                    ZipCode = "15-150",
+                    City = "Sopot",
+                    PersonToInvoice = "Kowalska J.",
+                    CreateDate = DateTime.Now
+                },
+                new Contractor
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Contractor"),
+                    Nip = "000-000-00-00",
+                    Street = "Kowalska",
+                    Number = "15A",
+                    ZipCode = "15-150",
+                    City = "Sopot",
+                    PersonToInvoice = "Kowalska J.",
+                    CreateDate = DateTime.Now
                 }
-                context.SaveChanges();
+            };
 
+            foreach (Contractor c in contractors)
+            {
+                context.Contractor.Add(c);
+            }
+            context.SaveChanges();
 
+            #endregion New Contractors
 
-                var invoices = new Invoice[]
+            #region New Products
+            var products = new Product[]
+            {
+                new Product
                 {
-                    new Invoice
-                    {
-                        Number = "2015/A/55555",
-                        BuyerID = 2,
-                        PayForm = PayForm.gotówka,
-                        totalToPay = 10,
-                        CreateDate = DateTime.Now,
-                        SaleDate = DateTime. Now,
-                        PaymentDate = DateTime.Now,
-                        ModifyDate = DateTime.Now
-                    },
-                     new Invoice
-                    {
-                        Number = "2/A/55555",
-                        BuyerID =3,
-                        PayForm = PayForm.karta,
-                        totalToPay = 1000,
-                        CreateDate = DateTime.Now,
-                        SaleDate = DateTime. Now,
-                        PaymentDate = DateTime.Now,
-                        ModifyDate = DateTime.Now
-                    },
-                      new Invoice
-                    {
-                        Number = "5/A/55555",
-                        BuyerID = 3,
-                        PayForm = PayForm.karta,
-                        totalToPay = 100000,
-                        CreateDate = DateTime.Now,
-                        SaleDate = DateTime. Now,
-                        PaymentDate = DateTime.Now,
-                        ModifyDate = DateTime.Now
-                    },
-                      new Invoice
-                    {
-                        Number = "1505/A/55555",
-                        BuyerID = 4,
-                        PayForm = PayForm.karta,
-                        totalToPay = 1000,
-                        CreateDate = DateTime.Now,
-                        SaleDate = DateTime. Now,
-                        PaymentDate = DateTime.Now,
-                        ModifyDate = DateTime.Now
-                    }
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Komar"),
+                    Price = 100*2,
+                    CreateDate = DateTime.Now
+                },
+                new Product
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Pralka"),
+                    Price = 100*3,
+                    CreateDate = DateTime.Now
+                },
+                new Product
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Krzesło"),
+                    Price = 100+3,
+                    CreateDate = DateTime.Now
+                },
+                new Product
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Kij"),
+                    Price = 100+2,
+                    CreateDate = DateTime.Now
+                },
+                new Product
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("Usługa"),
+                    Price = 100+2,
+                    CreateDate = DateTime.Now
+                }
+            };
+
+            foreach (Product c in products)
+            {
+                context.Product.Add(c);
+            }
+            context.SaveChanges();
+            #endregion New Products
+
+
+            #region New Invoice
+            var invoices = new Invoice[]
+            {
+                new Invoice
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Number = "2015/A/55555",
+                    ContractorID = contractors.Single(i => i.Name =="Contractor").ID.ToString(),
+                    CreateDate = DateTime.Now,
+                    SaleDate = DateTime. Now,
+                    PaymentDate = DateTime.Now
+                },
+                new Invoice
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Number = "2015/A/55555",
+                    ContractorID = contractors.Single(i => i.Name =="Contractor").ID.ToString(),
+                    CreateDate = DateTime.Now,
+                    SaleDate = DateTime. Now,
+                    PaymentDate = DateTime.Now
+                },
+                new Invoice
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Number = "2015/A/55555",
+                    ContractorID = contractors.Single(i => i.Name =="ContractorN").ID.ToString(),
+                    CreateDate = DateTime.Now,
+                    SaleDate = DateTime. Now,
+                    PaymentDate = DateTime.Now
+                },
+                new Invoice
+                {
+                   ID = Guid.NewGuid().ToString(),
+                    Number = "2015/A/55555",
+                    ContractorID = contractors.Single(i => i.Name =="ContractorNam").ID.ToString(),
+                    CreateDate = DateTime.Now,
+                    SaleDate = DateTime. Now,
+                    PaymentDate = DateTime.Now
+                }
+            };
+            foreach (Invoice c in invoices)
+            {
+                context.Invoice.Add(c);
+            }
+            context.SaveChanges();
+
+            #endregion New Invoice
+
+            #region InvoiceElemnts
+
+            #endregion InvoiceElemnts
+            var invoicelements = new InvoiceElement[]
+            {
+                new InvoiceElement
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                    ProductID = products.Single(i => i.Name =="Pralka").ID.ToString(),
+                    PositionNumber = 1,
+                    Quantity = 10,
+                    CreateDate =DateTime.Now
+                },
+                 new InvoiceElement
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                    ProductID = products.Single(i => i.Name =="Krzesło").ID.ToString(),
+                    PositionNumber = 2,
+                    Quantity = 10,
+                    CreateDate =DateTime.Now
+                },
+                new InvoiceElement
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                    ProductID = products.Single(i => i.Name =="Usługa").ID.ToString(),
+                    PositionNumber = 3,
+                    Quantity = 10,
+                    CreateDate =DateTime.Now
+                },
+                 new InvoiceElement
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    InvoiceID = "be77cf09-1e06-486d-81b0-4394e7d82f7d",
+                    ProductID = products.Single(i => i.Name =="Kij").ID.ToString(),
+                    PositionNumber = 1,
+                    Quantity = 10,
+                    CreateDate =DateTime.Now
+                }
                 };
 
-                foreach (Invoice i in invoices)
-                {
-                    context.Invoice.Add(i);
-
-                context.SaveChanges(); 
-
-                }
+            foreach (InvoiceElement i in invoicelements)
+            {
+                context.InvoiceElement.Add(i);
             }
-
-
-
-            }
-
-
-
-
-
-        }*/
+            context.SaveChanges();
+        }
 
     }
-    
- }
+}

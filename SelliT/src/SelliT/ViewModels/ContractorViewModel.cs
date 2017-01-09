@@ -17,7 +17,7 @@ namespace SelliT.ViewModels
         #endregion Constructor
 
         #region Properties
-        public int Id { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public string Nip { get; set; }
         public string Street { get; set; }
@@ -26,7 +26,6 @@ namespace SelliT.ViewModels
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string PersonToInvoice { get; set; }
-        public bool IsSeller { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
         public DateTime RemoveDate { get; set; }

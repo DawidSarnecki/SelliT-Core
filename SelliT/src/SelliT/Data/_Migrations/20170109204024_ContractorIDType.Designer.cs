@@ -8,9 +8,10 @@ using SelliT.Data;
 namespace SelliT.Data._Migrations
 {
     [DbContext(typeof(SellitContext))]
-    partial class SellitContextModelSnapshot : ModelSnapshot
+    [Migration("20170109204024_ContractorIDType")]
+    partial class ContractorIDType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

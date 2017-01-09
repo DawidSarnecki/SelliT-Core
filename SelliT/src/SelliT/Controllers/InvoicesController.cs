@@ -5,12 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SelliT.ViewModels;
 using Newtonsoft.Json;
+using SelliT.Data;
+using SelliT.Data.Invoices;
+using Nelibur.ObjectMapper;
 
 namespace SelliT.Controllers
 {
     [Route("api/[controller]")]
     public class InvoicesController : Controller
     {
+        #region Private Fields
+        private SellitContext DbContext;
+        #endregion Private Fields
+
+        #region Constructor
+        public InvoicesController(SellitContext context)
+        {
+            // Dependency Injetion
+            DbContext = context;
+        }
+        #endregion Constructor
+
         #region RESTful Conventions
         /// GET api/invoices/
         /// Returns: Nothing: this method will raise a HttpNotFound HTTP exception
@@ -20,19 +35,18 @@ namespace SelliT.Controllers
             return NotFound(new { Error = "not found" });
         }
 
-        /// GET: api/items/{id}
+        /// GET: api/invoices/{id}
         /// ROUTING TYPE: attribute-based
         /// Return: A Json-serialized object representing a single item.
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
-            return new JsonResult(GetSampleItems()
-                .Where(i => i.Id == id)
-                .FirstOrDefault(),
-                DefaultJsonSettings);
+            var invoice = DbContext.Invoice
+                .Where(i => i.ID == id)
+                .FirstOrDefault();
+            return new JsonResult(TinyMapper.Map<InvoiceViewModel>(invoice), DefaultJsonSettings);
         }
         #endregion
-
 
         #region Attribute-based Routing
         /// <summary>
@@ -52,37 +66,24 @@ namespace SelliT.Controllers
         public IActionResult GetLatest(int n)
         {
             if (n > MaxNumberOfInvoices) n = MaxNumberOfInvoices;
-            var items = GetSampleItems().OrderByDescending(i => i.CreateDate).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var invoices = DbContext.Invoice
+                .OrderByDescending(i => i.CreateDate)
+                .Take(n).ToArray();
+            return new JsonResult(ToInvoiceViewModelList(invoices), DefaultJsonSettings);
         }
         #endregion
 
 
         #region Private Members
-        /// Generate a sample array of source Items to emulate a database (for testing purposes only).
-        /// Param:  name="num" The number of items to generate: default is 100
-        /// Returns: a defined number of mock items (for testing purpose only)
-        private List<InvoiceViewModel> GetSampleItems(int num = 100)
+        /// Maps a collection of Item entities into a list of ItemViewModel objects.
+        /// param name="items": An IEnumerable collection of item entities
+        /// Returns a mapped list of ContractorViewModel objects
+        private List<InvoiceViewModel> ToInvoiceViewModelList(IEnumerable<Invoice> invoices)
         {
-            List<InvoiceViewModel> list = new List<InvoiceViewModel>();
-            DateTime date = new DateTime(2017, 01, 07).AddDays(-num);
-            for (int id = 1; id <= num; id++)
-            {
-                date = date.AddDays(1);
-                list.Add(new InvoiceViewModel()
-                {
-                    Id = id,
-                    BuyerName = String.Format("Invoice {0} BuyerName", id),
-                    BuyerAddress = String.Format("Invoice {0} BuyerAddress", id),
-                    BuyerNip = String.Format("{0}00-000-00-00", id),
-                    SellerName = String.Format("Invoice {0} BuyerName", id),
-                    SellerAddress = String.Format("Invoice {0} BuyerAddress", id),
-                    SellerNip = String.Format("{0}00-000-00-00", id),
-                    Description = String.Format("Invoice {0} Description", id),
-                    PayForm = "gotówka"
-                });
-            }
-            return list;
+            var lst = new List<InvoiceViewModel>();
+            foreach (var i in invoices)
+                lst.Add(TinyMapper.Map<InvoiceViewModel>(i));
+            return lst;
         }
 
         /// Returns a suitable JsonSerializerSettings object that can be used to generate the JsonResult return value for this Controller's methods.
@@ -116,32 +117,6 @@ namespace SelliT.Controllers
         }
         #endregion
 
-        #region GetLatestOld/{num}
-        /// Old GetLatest method
-        /// GET api/invoices/GetLatestOd/{n}
-        /// Returns: An array of {n} Json-serialized objects representingthe last inserted items.</returns> 
-        [HttpGet("GetLatestOld/{num}")]
-        public JsonResult GetLatestOld(int num)
-        {
-            var array = new List<InvoiceViewModel>();
-            for (int i = 1; i <= num; i++) array.Add(new InvoiceViewModel()
-            {
-                Id = i,
-                BuyerName = String.Format("Invoice {0} BuyerName", i),
-                BuyerAddress = String.Format("Invoice {0} BuyerAddress", i),
-                BuyerNip = String.Format("{0}00-000-00-00", i),
-                SellerName = String.Format("Invoice {0} BuyerName", i),
-                SellerAddress = String.Format("Invoice {0} BuyerAddress", i),
-                SellerNip = String.Format("{0}00-000-00-00", i),
-                Description = String.Format("Invoice {0} Description", i),
-                PayForm = "gotówka"
-            });
-            var settings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented
-            };
-            return new JsonResult(array, settings);
-        }
-        #endregion
+      
     }
 }

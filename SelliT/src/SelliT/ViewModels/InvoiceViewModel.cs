@@ -17,25 +17,17 @@ namespace SelliT.ViewModels
         #endregion Constructor
            
         #region Properties
-        public int Id { get; set; }
-        public string BuyerName { get; set; }
-        public string BuyerNip { get; set; }
-        public string BuyerAddress { get; set; }
-        public string SellerName { get; set; }
-        public string SellerNip { get; set; }
-        public string SellerAddress { get; set; }
-        public string Description { get; set; }
+        public string ID { get; set; }
+        public string ContractorID { get; set; }
         public string PayForm { get; set; }
         [DefaultValue(0)]
         public bool IsPaid { get; set; }
         public string UserId { get; set; }
-        [JsonIgnore]
-        public int ViewCount { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime SalesDate { get; set; }
-        public DateTime PayDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
-        public DateTime X_RemoveDate { get; set; }
+        public DateTime SaleDate { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public DateTime ModifydDate { get; set; }
+        public DateTime RemoveDate { get; set; }
         #endregion Properties
     }
 }

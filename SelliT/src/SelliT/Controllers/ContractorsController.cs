@@ -66,7 +66,9 @@ namespace SelliT.Controllers
         public IActionResult GetLatest(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var contracors = DbContext.Contractor.OrderByDescending(i => i.CreateDate).Take(n).ToArray();
+            var contracors = DbContext.Contractor
+                .OrderByDescending(i => i.CreateDate)
+                .Take(n).ToArray();
             return new JsonResult(ToContractorViewModelList(contracors), DefaultJsonSettings);
         }
         #endregion Attribute-based Routing
