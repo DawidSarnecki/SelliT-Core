@@ -24,6 +24,8 @@ namespace SelliT.Data.Invoices
         [Required]
         public int InvoiceId { get; set; }
         [Required]
+        public int Name { get; set; }
+        [Required]
         public int Quantity { get; set; }
         [Required]
         public string Unit { get; set; }
