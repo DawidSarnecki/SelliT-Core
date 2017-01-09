@@ -19,27 +19,28 @@ namespace SelliT.Data.Invoices
     {
 
         #region Constructor
+
         public Invoice()
         {
 
         }
+
         #endregion
 
         #region Properties
+
         [Key]
         [Required]
-        public int Id { get; set; }
+        public string ID { get; set; }
         [Required]
         public string Number { get; set; }
         [Required]
-        [DefaultValue(1)]
-        public int SellerID { get; set; }
+        public int ContractorID { get; set; }
         [Required]
-        public int BuyerID { get; set; }
-        [DefaultValue(1)]
+        public int UserID { get; set; }
+        [Required]
+        [DefaultValue(PayForm.przelew)]
         public PayForm PayForm { get; set; } 
-        [Required]
-        public double totalToPay { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
         [Required]
@@ -50,20 +51,18 @@ namespace SelliT.Data.Invoices
         public bool IsPaid { get; set; }
         [DefaultValue(null)]
         public DateTime PaidDate { get; set; }
-        [Required]
+        [DefaultValue(null)]
         public DateTime ModifyDate { get; set; }
         [DefaultValue(null)]
         public DateTime RemoveDate { get; set; }
-        #endregion
 
-        #region Related Properties
-        /// Buyer: this properties will be loaded on first use using EF's Lazy-Loading feature
-        //[ForeignKey("BuyerID")]
-        //public virtual Contractor Buyer { get; set; }
+        #endregion Properties
+
+        #region Navigation Properties
+
+        public ICollection<InvoiceElement> InvoiceElements { get; set; }
         
-        /// Current Invoice's InvoiceElement list: this property will be loaded on first use using EF's Lazy-Loading feature.
-        public virtual List<InvoiceElement> InvoiceElements { get; set; }
-        #endregion
+        #endregion Navigation Properties
 
     }
 }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using SelliT.Data.Contractors;
+using System.ComponentModel;
+using SelliT.Data.Products;
 
 namespace SelliT.Data.Invoices
 {
@@ -12,43 +13,42 @@ namespace SelliT.Data.Invoices
     public class InvoiceElement
     {
         #region Constructor
+
         public InvoiceElement()
         {
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
+
         [Key]
         [Required]
-        public int Id { get; set; }
+        public string ID { get; set; }
         [Required]
-        public int InvoiceId { get; set; }
+        public int InvoiceID { get; set; }
         [Required]
-        public int Name { get; set; }
+        public int ProductID{ get; set; }
+        [Required]
+        public int PositionNumber { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
-        public string Unit { get; set; }
-        [Required]
-        public double Price { get; set; }
-        [Required]
-        public double value { get; set; }
-        [Required]
-        public double Vat { get; set; }
-        [Required]
-        public double VatValue { get; set; }
-        [Required]
         public DateTime CreateDate { get; set; }
-        [Required]
+        [DefaultValue(null)]
         public DateTime ModifyDate { get; set; }
+        [DefaultValue(null)]
         public DateTime RemoveDate { get; set; }
-        #endregion
 
-        #region Related Properties
-        ///Seller, Buyer: this properties will be loaded on first use using EF's Lazy-Loading feature.
-        [ForeignKey("InvoiceIdID")]
-        public virtual Invoice Invoice { get; set; }
-        #endregion
+        #endregion Properties
+
+
+        #region Navigation Properties
+
+        public Invoice Invoice { get; set; }
+        public Product Product { get; set; }
+
+        #endregion  Navigation Properties
 
 
     }

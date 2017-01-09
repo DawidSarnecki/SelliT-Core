@@ -47,12 +47,12 @@ namespace SelliT
 
             // Add EntityFramework's Identity support.services.AddEntityFramework();
             // Add AppDbContext.
-            services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]) );
+            services.AddDbContext<SellitContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")) );
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, AppDbContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, SellitContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

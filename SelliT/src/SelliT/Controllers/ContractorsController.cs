@@ -15,11 +15,11 @@ namespace SelliT.Controllers
     public class ContractorsController : Controller
     {
         #region Private Fields
-        private AppDbContext DbContext;
+        private SellitContext DbContext;
         #endregion Private Fields
         
         #region Constructor
-        public ContractorsController(AppDbContext context)
+        public ContractorsController(SellitContext context)
         {
             // Dependency Injetion
             DbContext = context;
@@ -41,9 +41,9 @@ namespace SelliT.Controllers
         /// ROUTING TYPE: attribute-based
         /// Return: A Json-serialized object representing a single item.
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
-            var contractor = DbContext.Contractor.Where(c => c.Id == id).FirstOrDefault();
+            var contractor = DbContext.Contractor.Where(c => c.ID == id).FirstOrDefault();
             return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
         }
         #endregion RESTful Conventions

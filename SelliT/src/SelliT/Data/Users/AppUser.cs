@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using SelliT.Data.Invoices;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SelliT.Data.Contractors
+
+namespace SelliT.Data.Users
 {
-    public class Contractor
+    public class AppUser
     {
         #region Constructor
-        public Contractor()
+        public AppUser()
         {
-
         }
-        #endregion
+        #endregion Constructor
 
         #region Properties
-
         [Key]
         [Required]
         public string ID { get; set; }
         [Required]
+        [MaxLength(128)]
+        public string UserName { get; set; }
+        [Required]
+        public string Email { get; set; }
         public string Name { get; set; }
         [Required]
         public string Nip { get; set; }
@@ -31,7 +34,7 @@ namespace SelliT.Data.Contractors
         public string Street { get; set; }
         [Required]
         public string Number { get; set; }
-        [DefaultValue(null)]
+        [DefaultValue("")]
         public string ApartmentNumber { get; set; }
         [Required]
         public string ZipCode { get; set; }
@@ -40,18 +43,15 @@ namespace SelliT.Data.Contractors
         [Required]
         public string PersonToInvoice { get; set; }
         [Required]
+        [DefaultValue(false)]
+        public bool IsSeller { get; set; }
+        [Required]
         public DateTime CreateDate { get; set; }
-        [DefaultValue(null)]
+        [Required]
         public DateTime ModifyDate { get; set; }
-        [DefaultValue(null)]
         public DateTime RemoveDate { get; set; }
+        #endregion Properties
 
-        #endregion
-
-        #region Navigation Properties
-
-        public ICollection<InvoiceElement> InvoiceElements { get; set; }
-
-        #endregion Navigation Properties
     }
+
 }

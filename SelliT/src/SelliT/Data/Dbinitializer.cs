@@ -11,14 +11,26 @@ namespace SelliT.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(AppDbContext context)
+        public static void Initialize(SellitContext context)
         {
+            /*
             
             // Look for any Contractors.
             if (context.Contractor.Any())
             {
                 return;   // DB has been seeded
             }
+
+#if DEBUG
+            var num = 100;  // create 100 sample contracors
+            for (int id = 1; id <= num; id++)
+            {
+                DbContext.Contractor.Add(GetSampleContractor(authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
+            }
+#endif
+
+
+
 
             var contractors = new Contractor[]
             {
@@ -31,7 +43,6 @@ namespace SelliT.Data
                     ZipCode ="15-150",
                     City = "Sopot",
                     PersonToInvoice ="Kowalska J.",
-                    IsSeller = true,
                     CreateDate = DateTime.Now,
                     ModifyDate = DateTime.Now
                 },
@@ -197,6 +208,34 @@ namespace SelliT.Data
             
             }
         }
+
+        private Contractor GetSampleContractor(string authorId, int viewCount, DateTime createdDate)
+        {
+            return new Contractor()
+            {
+                Name = "Carson",
+                Nip = "000-000-00-00",
+                Street = "Kowalska",
+                Number = "15A",
+                ZipCode = "15-150",
+                City = "Sopot",
+                PersonToInvoice = "Kowalska J.",
+                CreateDate = DateTime.Now,
+                ModifyDate = DateTime.Now
+
+                UserId = authorId,
+                Title = String.Format("Item {0} Title", id),
+                Description = String.Format("This is a sample description for item {0}: Lorem ipsum dolor sit amet.", id),
+                Notes = "This is a sample record created by the Code-First Configuration class",
+                ViewCount = viewCount,
+                CreatedDate = createdDate,
+                LastModifiedDate = createdDate
+            };
+            */
+        }
+
+
+
 
 
     }

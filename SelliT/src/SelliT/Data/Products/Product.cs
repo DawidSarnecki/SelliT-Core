@@ -1,22 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
 using SelliT.Data.Invoices;
 
-namespace SelliT.Data.Contractors
+namespace SelliT.Data.Products
 {
-    public class Contractor
+    public enum TaxRate
+    {
+         Vat23 = 23,
+         Vat8 = 8,
+         Vat7 = 7,
+         Vat4 = 4,
+         ZW = 0
+    }
+    public enum Unit
+    {
+        szt, kpl, l, kg
+    }
+
+    public class Product
     {
         #region Constructor
-        public Contractor()
+
+        public Product()
         {
 
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
 
@@ -24,21 +38,17 @@ namespace SelliT.Data.Contractors
         [Required]
         public string ID { get; set; }
         [Required]
-        public string Name { get; set; }
+        public int Name { get; set; }
         [Required]
-        public string Nip { get; set; }
+        public int Quantity { get; set; }
         [Required]
-        public string Street { get; set; }
+        [DefaultValue(Unit.szt)]
+        public Unit Unit { get; set; }
         [Required]
-        public string Number { get; set; }
-        [DefaultValue(null)]
-        public string ApartmentNumber { get; set; }
+        public double Price { get; set; }
         [Required]
-        public string ZipCode { get; set; }
-        [Required]
-        public string City { get; set; }
-        [Required]
-        public string PersonToInvoice { get; set; }
+        [DefaultValue(TaxRate.Vat23)]
+        public TaxRate TaxRate { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
         [DefaultValue(null)]
@@ -46,7 +56,7 @@ namespace SelliT.Data.Contractors
         [DefaultValue(null)]
         public DateTime RemoveDate { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Navigation Properties
 
@@ -54,4 +64,5 @@ namespace SelliT.Data.Contractors
 
         #endregion Navigation Properties
     }
+
 }
