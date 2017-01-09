@@ -38,9 +38,7 @@ namespace SelliT.Data.Products
         [Required]
         public string ID { get; set; }
         [Required]
-        public int Name { get; set; }
-        [Required]
-        public int Quantity { get; set; }
+        public string Name { get; set; }
         [Required]
         [DefaultValue(Unit.szt)]
         public Unit Unit { get; set; }
