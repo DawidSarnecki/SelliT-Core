@@ -15,12 +15,14 @@ namespace SelliT.Data
     {
         public static void Initialize(SellitContext context)
         {
+
             // Look for any Contractors.
             if (context.Contractor.Any())
             {
                 return;   // DB has been seeded
             }
-           
+
+
             var num = 20;  // create 20 sample contractors
             var contractors = new List<Contractor>();
             for (int id = 1; id <= num; id++)
