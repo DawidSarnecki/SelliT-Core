@@ -26,9 +26,9 @@ namespace SelliT.Data.Invoices
         [Required]
         public string ID { get; set; }
         [Required]
-        public int InvoiceID { get; set; }
+        public string InvoiceID { get; set; }
         [Required]
-        public int ProductID{ get; set; }
+        public string ProductID{ get; set; }
         [Required]
         public int PositionNumber { get; set; }
         [Required]

@@ -35,9 +35,9 @@ namespace SelliT.Data.Invoices
         [Required]
         public string Number { get; set; }
         [Required]
-        public int ContractorID { get; set; }
+        public string ContractorID { get; set; }
         [Required]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         [Required]
         [DefaultValue(PayForm.przelew)]
         public PayForm PayForm { get; set; } 

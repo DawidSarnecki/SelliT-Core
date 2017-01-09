@@ -7,6 +7,7 @@ using SelliT.Data.Products;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SelliT.Data
 {
@@ -14,46 +15,41 @@ namespace SelliT.Data
     {
         public static void Initialize(SellitContext context)
         {
-            /*
-
             // Look for any Contractors.
             if (context.Contractor.Any())
             {
                 return;   // DB has been seeded
             }
-
-#if DEBUG
+           
             var num = 20;  // create 20 sample contractors
+            var contractors = new List<Contractor>();
             for (int id = 1; id <= num; id++)
             {
-                context.Contractor.Add(GetSampleContractor(num - id));
+                contractors.Add(GetSampleContractor(num - 1));
+            }
+            foreach (var item in contractors)
+            {
+                context.Contractor.Add(item);
             }
 
             // create 20 sample products
             for (int id = 1; id <= num; id++)
             {
                 context.Product.Add(GetSampleProduct(num - id));
+                
             }
-#endif
-
         }
-            private static Product GetSampleProduct(int number)
+
+        private static Product GetSampleProduct(int number)
             {
                 return new Product()
                 {
                     ID = Guid.NewGuid().ToString(),
-                    Name = String.Format("Contractor {0} Name", number),
-                    Nip = "000-000-00-00",
-                    Street = "Kowalska",
-                    Number = "15A",
-                    ZipCode = "15-150",
-                    City = "Sopot",
-                    PersonToInvoice = "Kowalska J.",
+                    Name = String.Format("Product {0} Name", number),
+                    Price = 100+2*number,
                     CreateDate = DateTime.Now
                 };
             }
-
-
 
             private static Contractor GetSampleContractor(int number)
             {
@@ -71,8 +67,8 @@ namespace SelliT.Data
                 };
             }
 
-
-
+       
+        /*
 
 
                 var invoicElements = new InvoiceElement[]
@@ -197,11 +193,11 @@ namespace SelliT.Data
             }
 
 
-*/
 
 
-        }
+
+        }*/
 
     }
     
-        }
+ }
