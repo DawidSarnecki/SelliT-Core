@@ -42,7 +42,7 @@ namespace SelliT.Data.Invoices
 
         #endregion Properties
 
-
+        //properties
         #region Navigation Properties
 
         public Invoice Invoice { get; set; }
