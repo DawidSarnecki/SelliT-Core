@@ -20,7 +20,6 @@ namespace SelliT.ViewModels
         public string ID { get; set; }
         public string ContractorID { get; set; }
         public string PayForm { get; set; }
-        [DefaultValue(0)]
         public bool IsPaid { get; set; }
         public string UserId { get; set; }
         public DateTime CreateDate { get; set; }
