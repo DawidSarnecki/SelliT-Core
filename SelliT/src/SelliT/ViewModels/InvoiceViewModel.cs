@@ -34,17 +34,7 @@ namespace SelliT.ViewModels
         {
             get { return ContractorID + ", " + ID; }
         }
-        /*
-        public ICollection<InvoiceElement> InvoiceElements { get; set; }
-
-        public ICollection<InvoiceElement> InvoiceElement { get; set; }
-        
-        foreach (InvoiceElement e in InvoiceElements)
-            {
-            System.DateTime.Now;
-            }
-
-    */
+  
         public string test
         {
             get { return "test"; }
