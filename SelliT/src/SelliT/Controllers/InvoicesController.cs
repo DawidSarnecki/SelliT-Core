@@ -15,7 +15,7 @@ namespace SelliT.Controllers
     public class InvoicesController : Controller
     {
         #region Private Fields
-        private SellitContext DbContext;
+        private readonly SellitContext DbContext;
         #endregion Private Fields
 
         #region Constructor
@@ -71,13 +71,69 @@ namespace SelliT.Controllers
                 .Take(n).ToArray();
             return new JsonResult(ToInvoiceViewModelList(invoices), DefaultJsonSettings);
         }
+
+        /// <summary>
+        /// GET: api/items/GetLatest
+        /// ROUTING TYPE: attribute-based
+        /// Returns: An array of a default number of Json-serialized objects representing the last inserted items.
+        /// 
+
+       
+
+        [HttpGet("GetAllDetail")]
+        public IActionResult GetAllDetail()
+        {
+            var invoices = DbContext.Invoice;
+            var elements = DbContext.InvoiceElement;
+            var invoiceDetail =
+                from i in invoices
+                join el in elements on i.ID equals el.InvoiceID into ivoiceEl
+                select new
+                {
+                    Invoice = invoices,
+                    InvoiceElements = from el2 in ivoiceEl
+                                     select el2
+                };
+            //invoiceDetail.ToArray();
+            // foreach (InvoiceElement e in i.InvoiceElements.Where(e => e.InvoiceID
+            //JsonResult jsonInvoice, jsonElement;
+            foreach (var inv in invoiceDetail)
+            {
+                foreach (var elem in inv.InvoiceElements)
+                {
+                    return new JsonResult(ToInvoiceElementViewModelList(inv.InvoiceElements.ToArray()), DefaultJsonSettings);
+                }
+                return new JsonResult(ToInvoiceViewModelList(inv.Invoice.ToArray()), DefaultJsonSettings);
+            }
+
+        }
+
+        [HttpGet("GetAllElements")]
+        public IActionResult GetAllElements()
+        {
+                var invoiceElements = DbContext.InvoiceElement.ToArray();
+
+                return new JsonResult(ToInvoiceElementViewModelList(invoiceElements), DefaultJsonSettings);
+     
+        }
+
         #endregion
 
-
         #region Private Members
-        /// Maps a collection of Item entities into a list of ItemViewModel objects.
-        /// param name="items": An IEnumerable collection of item entities
-        /// Returns a mapped list of ContractorViewModel objects
+        /// Maps a collection of InvoiceElement entities into a list of InvoiceElementsViewModel objects.
+        /// param name=invoiceElements": An IEnumerable collection of item entities
+        /// Returns a mapped list of InvoiceElementsViewModel objects
+        private List<InvoiceElementsViewModel> ToInvoiceElementViewModelList(IEnumerable<InvoiceElement> invoiceElements)
+        {
+            var lst = new List<InvoiceElementsViewModel>();
+            foreach (var i in invoiceElements)
+                lst.Add(TinyMapper.Map<InvoiceElementsViewModel>(i));
+            return lst;
+        }
+
+        /// Maps a collection of Invoice entities into a list of ItemViewModel objects.
+        /// param name="invoices": An IEnumerable collection of item entities
+        /// Returns a mapped list of InvoiceViewModel objects
         private List<InvoiceViewModel> ToInvoiceViewModelList(IEnumerable<Invoice> invoices)
         {
             var lst = new List<InvoiceViewModel>();

@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SelliT.Data.Invoices;
+using SelliT.Data.Products;
+
 
 namespace SelliT.ViewModels
 {
@@ -27,6 +30,26 @@ namespace SelliT.ViewModels
         public DateTime PaymentDate { get; set; }
         public DateTime ModifydDate { get; set; }
         public DateTime RemoveDate { get; set; }
+        public string SumoOfID
+        {
+            get { return ContractorID + ", " + ID; }
+        }
+        /*
+        public ICollection<InvoiceElement> InvoiceElements { get; set; }
+
+        public ICollection<InvoiceElement> InvoiceElement { get; set; }
+        
+        foreach (InvoiceElement e in InvoiceElements)
+            {
+            System.DateTime.Now;
+            }
+
+    */
+        public string test
+        {
+            get { return "test"; }
+        }
+
         #endregion Properties
     }
 }

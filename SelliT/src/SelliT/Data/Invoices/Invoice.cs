@@ -60,7 +60,7 @@ namespace SelliT.Data.Invoices
 
         #region Navigation Properties
 
-        public ICollection<InvoiceElement> InvoiceElements { get; set; }
+        public IEnumerable<InvoiceElement> InvoiceElements { get; set; }
         
         #endregion Navigation Properties
 
