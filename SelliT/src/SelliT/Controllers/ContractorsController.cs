@@ -103,7 +103,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 3;
+                return 5;
             }
         }
 
@@ -112,7 +112,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 5;
+                return 10;
             }
         }
         #endregion Private Members
