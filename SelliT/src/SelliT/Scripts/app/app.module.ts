@@ -4,11 +4,15 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import "rxjs/Rx";
 import {AppComponent} from "./app.component";
+import {ContractorListComponent} from "./contractor-list.component";
+import {ContractorService} from "./contractor.service";
+
 @NgModule({
 
     // directives, components, and pipes
     declarations: [
-        AppComponent
+        AppComponent,
+        ContractorListComponent
     ],
 
     // modules
@@ -19,6 +23,7 @@ import {AppComponent} from "./app.component";
 
     // providers
     providers: [
+        ContractorService
     ],
     bootstrap: [
         AppComponent

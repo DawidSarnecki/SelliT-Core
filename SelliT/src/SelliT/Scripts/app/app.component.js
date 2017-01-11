@@ -20,13 +20,14 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         execute: function () {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.title = "List of Contractors";
                 }
                 return AppComponent;
             }());
             AppComponent = __decorate([
                 core_1.Component({
                     selector: "invoicelist",
-                    template: "<h1>InvoiceList</h1><div>Loading, give us a while...</div>"
+                    template: "\n        <h1>{{title}}</h1>\n        <contractor-list></contractor-list>\n        "
                 }),
                 __metadata("design:paramtypes", [])
             ], AppComponent);
