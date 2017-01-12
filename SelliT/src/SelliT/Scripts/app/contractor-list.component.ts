@@ -10,9 +10,10 @@ import {ContractorService} from "./contractor.service";
                 <li *ngFor="let contractor of contractors"
                     [class.selected]="contractor === selectedContractor"
                     (click) ="onSelect(contractor)">
+                    <span>{{contractor.Name}}</span>
                 </li>
             </ul>
-            <contractor-detail *ngIf="selectedContractor" [contractor]="selectedContractor"></<contractor-detail>
+            <contractor-detail *ngIf="selectedContractor" [contractor]="selectedContractor"></contractor-detail>
             `,
     styles: [`
         ul.contractors li { 

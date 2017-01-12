@@ -45,7 +45,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable"], function 
                         .map(function (response) { return response.json(); })
                         .catch(this.handledError);
                 };
-                // calls the [GET] /api/contractors/{n} Web API method to get the item with the give ID.
+                // calls the [GET] /api/contractors/{ID} Web API method to get the item with the give ID.
                 ContractorService.prototype.get = function (id) {
                     if (id == null) {
                         throw new Error("ID is required!");
