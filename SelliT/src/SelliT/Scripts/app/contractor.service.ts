@@ -25,7 +25,7 @@ export class ContractorService {
             .catch(this.handledError) ;
     }
 
-    // calls the [GET] /api/contractors/{n} Web API method to get the item with the give ID.
+    // calls the [GET] /api/contractors/{ID} Web API method to get the item with the give ID.
     get(id?: number) {
         if (id == null) { throw new Error("ID is required!"); }
         var url = this.baseUrl + id;

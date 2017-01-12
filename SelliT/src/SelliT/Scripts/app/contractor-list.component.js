@@ -42,7 +42,7 @@ System.register(["@angular/core", "./contractor.service"], function (exports_1, 
             ContractorListComponent = __decorate([
                 core_1.Component({
                     selector: "contractor-list",
-                    template: "\n        <h2>Latest Used Contractors</h2>\n            <ul class=\"contractors\">\n                <li *ngFor=\"let contractor of contractors\"\n                    [class.selected]=\"contractor === selectedContractor\"\n                    (click) =\"onSelect(contractor)\">\n                    <span>Name: {{contractor.Name}}</span>\n                    <span>; City: {{contractor.City}}</span>\n                    <span>; NIp: {{contractor.Nip}}</span>\n                </li>\n            </ul>\n            ",
+                    template: "\n        <h2>Latest Used Contractors</h2>\n            <ul class=\"contractors\">\n                <li *ngFor=\"let contractor of contractors\"\n                    [class.selected]=\"contractor === selectedContractor\"\n                    (click) =\"onSelect(contractor)\">\n                </li>\n            </ul>\n            <contractor-detail *ngIf=\"selectedContractor\" [contractor]=\"selectedContractor\"></<contractor-detail>\n            ",
                     styles: ["\n        ul.contractors li { \n            cursor: pointer;}\n        ul.contractors li.selected { \n            background-color: #d1d1e0;}\n    "]
                 }),
                 __metadata("design:paramtypes", [contractor_service_1.ContractorService])
