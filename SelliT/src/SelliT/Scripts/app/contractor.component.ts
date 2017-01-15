@@ -2,7 +2,8 @@
 @Component({
     selector: "contractor",
     template: `
-        <h1>{{title}}</h1>
+        <h2>{{title}}</h2>
+        <h3><a class="add" [routerLink]="['new']"> + New contractor</a></h3>
         <contractor-list></contractor-list>
         `
 })

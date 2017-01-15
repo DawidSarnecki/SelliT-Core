@@ -168,7 +168,7 @@ namespace SelliT.Controllers
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
             var contracors = DbContext.Contractor
-                .OrderByDescending(i => i.CreateDate)
+                .OrderByDescending(i => i.ModifyDate)
                 .Take(n).ToArray();
             return new JsonResult(ToContractorViewModelList(contracors), DefaultJsonSettings);
         }

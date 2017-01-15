@@ -2,11 +2,20 @@
 @Component({
     selector: "sellitapp",
     template: `
+        <h1>{{title}}</h1>
+        <h3>{{subTitle}}</h3>
+        <hr>
         <div>
-            <a class="contractor" [routerLink]="['contractor']">Contractors</a>
-            | <a class="add" [routerLink]="['contractor', 'new']"> + New contractor</a>
+            <h4>
+            | <a class="add" [routerLink]="['invoice', 'new']"> + New Invoice</a>
+            | <a class="invoice" [routerLink]="['invoice']">Invoices</a>
+            | <a class="contractor" [routerLink]="['contractor']">Contractors</a>
+            | <a class="product" [routerLink]="['invoice']">Products</a>
+            | <a class="product" [routerLink]="['settings']">Settings</a>
             | <a class="login" [routerLink]="['login']">Login</a>
+            </h4>
         </div>
+        <hr>
         <router-outlet></router-outlet>
         `
 })

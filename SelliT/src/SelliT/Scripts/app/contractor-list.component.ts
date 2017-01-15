@@ -6,7 +6,7 @@ import {ContractorService} from "./contractor.service";
 @Component({
     selector: "contractor-list",
     template: `
-        <h2>Latest Used Contractors</h2>
+        <h3>Latest Used Contractors</h3>
             <ul class="contractors">
                 <li *ngFor="let contractor of contractors"
                     [class.selected]="contractor === selectedContractor"

@@ -6,6 +6,7 @@ import {ContractorService} from "./contractor.service";
 @Component({
     selector: "contractor-detail",
     template: `
+        <h3>Contractor edit</h3>
         <div *ngIf="contractor" class="details">
             <h2>{{contractor.Name}} - Details </h2>
             <ul>
