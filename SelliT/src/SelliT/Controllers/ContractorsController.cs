@@ -29,6 +29,7 @@ namespace SelliT.Controllers
 
 
         #region RESTful Conventions
+        #region HttpGet
         /// GET api/constructors/
         /// Returns: Nothing: this method will raise a HttpNotFound HTTP exception
         [HttpGet()]
@@ -38,18 +39,105 @@ namespace SelliT.Controllers
         }
 
         /// GET: api/constructors/{id}
-        /// ROUTING TYPE: attribute-based
         /// Return: A Json-serialized object representing a single item.
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             var contractor = DbContext.Contractor.Where(c => c.ID == id).FirstOrDefault();
-            if (contractor==null)
+            if (contractor == null)
             {
-                return NotFound(new { Error = "not found" });
+                return NotFound(new { Error = String.Format("Contractor ID {0} not found", id )});
             }
-            return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
+            else
+                return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
         }
+        #endregion HttpGet
+
+        #region HttpPost
+        /// POST: api/constructors
+        /// Return: Creates a new Item and return it.
+        [HttpPost()]
+        public IActionResult Add([FromBody]ContractorViewModel cvm)
+        {
+            if (cvm != null)
+            {
+                // create a new Contractor with the client-sent json data
+                var newContractor = TinyMapper.Map<Contractor>(cvm);
+
+                // override any property that could be set from server-side only
+                newContractor.ID = Guid.NewGuid().ToString();
+                newContractor.CreateDate = DateTime.Now;
+
+                //add the new contractor
+                DbContext.Contractor.Add(newContractor);
+
+                //save the changes into the db
+                DbContext.SaveChanges();
+
+                //return created Contractor to the clinet
+                return new JsonResult(TinyMapper.Map<ContractorViewModel>(newContractor), DefaultJsonSettings);
+            }
+            // return a generic HTTP Status 500 (Not Found) if the client request is invalid.
+            return new StatusCodeResult(500);
+        }
+        #endregion HttpPost
+
+        #region HttpPut
+        /// PUT: api/constructors/{id}
+        /// Return: Updates an existing Contractor and return it.
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, [FromBody]ContractorViewModel cvm)
+        {
+            if (cvm != null)
+            {
+                // find contractor with the given ID
+                var contractor = DbContext.Contractor.Where(i => i.ID == id).FirstOrDefault();
+
+                if (contractor != null)
+                {
+                    // handle the update
+                    contractor = TinyMapper.Map<Contractor>(cvm);
+
+                    // override any property that could be set from server-side only
+                    contractor.ModifyDate = DateTime.Now;
+
+                    //save the changes into the db
+                    DbContext.SaveChanges();
+
+                    //return updated Contractor to the clinet
+                    return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
+                }
+            }
+                //return a HTTP Status 404 (Not Found) if contractor has not been found
+                return NotFound(new { Error = String.Format("Contractor ID {0} not found", id) });
+        }
+        #endregion HttpPut
+
+
+        #region HttpDelete
+        /// DELETE: api/constructors/{id}
+        /// Return: Removes an existing Contractor, returning a HTTP status 200 (ok) when done.
+        public IActionResult Delete(string id)
+        {
+            var contractor = DbContext.Contractor.Where(c => c.ID == id).FirstOrDefault();
+
+            if (contractor != null)
+            {
+                // remove the contractor
+                DbContext.Contractor.Remove(contractor);
+
+                //save the changes into the db
+                DbContext.SaveChanges();
+
+                // return an HTTP Status 200 (OK).
+                return new OkResult();
+            }
+            
+            //return a HTTP Status 404 (Not Found) if contractor has not been found
+            return NotFound(new { Error = String.Format("Contractor ID {0} not found", id) });
+        }
+
+        #endregion HttpDelete
         #endregion RESTful Conventions
 
 
