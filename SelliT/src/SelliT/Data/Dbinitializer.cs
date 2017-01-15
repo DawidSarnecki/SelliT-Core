@@ -188,7 +188,7 @@ namespace SelliT.Data
                 new InvoiceElement
                 {
                     ID = Guid.NewGuid().ToString(),
-                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                    InvoiceID ="06373668-d16f-4c0e-b36b-d39f90dea8b5",
                     ProductID = products.Single(i => i.Name =="Pralka").ID.ToString(),
                     PositionNumber = 1,
                     Quantity = 10,
@@ -197,7 +197,7 @@ namespace SelliT.Data
                  new InvoiceElement
                 {
                     ID = Guid.NewGuid().ToString(),
-                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                     InvoiceID = "06373668-d16f-4c0e-b36b-d39f90dea8b5",
                     ProductID = products.Single(i => i.Name =="Krzesło").ID.ToString(),
                     PositionNumber = 2,
                     Quantity = 10,
@@ -206,7 +206,7 @@ namespace SelliT.Data
                 new InvoiceElement
                 {
                     ID = Guid.NewGuid().ToString(),
-                    InvoiceID = "27f738b6-437e-46e9-97bf-cbbab354ddfc",
+                     InvoiceID ="06373668-d16f-4c0e-b36b-d39f90dea8b5",
                     ProductID = products.Single(i => i.Name =="Usługa").ID.ToString(),
                     PositionNumber = 3,
                     Quantity = 10,
@@ -215,7 +215,7 @@ namespace SelliT.Data
                  new InvoiceElement
                 {
                     ID = Guid.NewGuid().ToString(),
-                    InvoiceID = "be77cf09-1e06-486d-81b0-4394e7d82f7d",
+                     InvoiceID ="06373668-d16f-4c0e-b36b-d39f90dea8b5",
                     ProductID = products.Single(i => i.Name =="Kij").ID.ToString(),
                     PositionNumber = 1,
                     Quantity = 10,

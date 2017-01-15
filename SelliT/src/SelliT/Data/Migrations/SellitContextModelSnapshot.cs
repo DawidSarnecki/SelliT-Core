@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SelliT.Data;
 
-namespace SelliT.Data._Migrations
+namespace SelliT.Data.Migrations
 {
     [DbContext(typeof(SellitContext))]
-    [Migration("20170109204024_ContractorIDType")]
-    partial class ContractorIDType
+    partial class SellitContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

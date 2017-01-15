@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SelliT.Data._Migrations
+namespace SelliT.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace SelliT.Data._Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(nullable: false),
-                    ContractorID = table.Column<int>(nullable: false),
+                    ContractorID = table.Column<string>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     IsPaid = table.Column<bool>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
@@ -45,7 +45,7 @@ namespace SelliT.Data._Migrations
                     PaymentDate = table.Column<DateTime>(nullable: false),
                     RemoveDate = table.Column<DateTime>(nullable: false),
                     SaleDate = table.Column<DateTime>(nullable: false),
-                    UserID = table.Column<int>(nullable: false)
+                    UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,9 +59,8 @@ namespace SelliT.Data._Migrations
                     ID = table.Column<string>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
                     RemoveDate = table.Column<DateTime>(nullable: false),
                     TaxRate = table.Column<int>(nullable: false),
                     Unit = table.Column<int>(nullable: false)
@@ -103,12 +102,10 @@ namespace SelliT.Data._Migrations
                     ID = table.Column<string>(nullable: false),
                     ContractorID = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    InvoiceID = table.Column<int>(nullable: false),
-                    InvoiceID1 = table.Column<string>(nullable: true),
+                    InvoiceID = table.Column<string>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
                     PositionNumber = table.Column<int>(nullable: false),
-                    ProductID = table.Column<int>(nullable: false),
-                    ProductID1 = table.Column<string>(nullable: true),
+                    ProductID = table.Column<string>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     RemoveDate = table.Column<DateTime>(nullable: false)
                 },
@@ -122,17 +119,17 @@ namespace SelliT.Data._Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_InvoiceElement_Invoice_InvoiceID1",
-                        column: x => x.InvoiceID1,
+                        name: "FK_InvoiceElement_Invoice_InvoiceID",
+                        column: x => x.InvoiceID,
                         principalTable: "Invoice",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InvoiceElement_Product_ProductID1",
-                        column: x => x.ProductID1,
+                        name: "FK_InvoiceElement_Product_ProductID",
+                        column: x => x.ProductID,
                         principalTable: "Product",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -141,14 +138,14 @@ namespace SelliT.Data._Migrations
                 column: "ContractorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceElement_InvoiceID1",
+                name: "IX_InvoiceElement_InvoiceID",
                 table: "InvoiceElement",
-                column: "InvoiceID1");
+                column: "InvoiceID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceElement_ProductID1",
+                name: "IX_InvoiceElement_ProductID",
                 table: "InvoiceElement",
-                column: "ProductID1");
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

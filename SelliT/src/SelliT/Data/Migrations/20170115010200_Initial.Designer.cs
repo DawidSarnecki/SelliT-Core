@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SelliT.Data;
 
-namespace SelliT.Data._Migrations
+namespace SelliT.Data.Migrations
 {
     [DbContext(typeof(SellitContext))]
-    [Migration("20170109191347_ChangedIDType")]
-    partial class ChangedIDType
+    [Migration("20170115010200_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,8 @@ namespace SelliT.Data._Migrations
                     b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ContractorID");
+                    b.Property<string>("ContractorID")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreateDate");
 
@@ -82,7 +83,7 @@ namespace SelliT.Data._Migrations
 
                     b.Property<DateTime>("SaleDate");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
