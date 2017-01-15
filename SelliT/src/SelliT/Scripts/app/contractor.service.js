@@ -45,7 +45,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable"], function(
                         .map(function (response) { return response.json(); })
                         .catch(this.handledError);
                 };
-                // calls the [GET] /api/contractors/{ID} Web API method to get the item with the give ID.
+                // calls the [GET] /api/contractors/{ID} Web API method to get the item with the giveN ID.
                 ContractorService.prototype.get = function (id) {
                     if (id == null) {
                         throw new Error("ID is required!");
@@ -54,6 +54,32 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable"], function(
                     return this.http.get(url)
                         .map(function (response) { return response.json(); })
                         .catch(this.handledError);
+                };
+                // calls the [POST] api/contractors/ Web API method to ADD a new item.
+                ContractorService.prototype.add = function (item) {
+                    var url = this.baseUrl;
+                    return this.http.post(url, JSON.stringify(item), this.getRequestOptions())
+                        .map(function (response) { return response.json(); })
+                        .catch(this.handledError);
+                };
+                // calls the [PUT] api/contractors/ Web API method to UPDATE an existing item.
+                ContractorService.prototype.update = function (item) {
+                    var url = this.baseUrl + item.ID;
+                    return this.http.put(url, JSON.stringify(item), this.getRequestOptions())
+                        .map(function (response) { return response.json(); })
+                        .catch(this.handledError);
+                };
+                // calls the [DELETE] api/contractors/ Web API method to DELETE an item with given ID.
+                ContractorService.prototype.delete = function (id) {
+                    var url = this.baseUrl + id;
+                    return this.http.delete(url)
+                        .catch(this.handledError);
+                };
+                // return RequestOptions object to handle Json requests
+                ContractorService.prototype.getRequestOptions = function () {
+                    return new http_1.RequestOptions({
+                        headers: new http_1.Headers({ "Content-Type": "application/json" })
+                    });
                 };
                 ContractorService = __decorate([
                     core_1.Injectable(), 

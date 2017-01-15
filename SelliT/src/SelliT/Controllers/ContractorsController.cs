@@ -96,17 +96,25 @@ namespace SelliT.Controllers
                 if (contractor != null)
                 {
                     // handle the update
-                    contractor = TinyMapper.Map<Contractor>(cvm);
-
-                    // override any property that could be set from server-side only
+                    contractor.Name = cvm.Name;
+                    contractor.Nip = cvm.Nip;
+                    contractor.Street = cvm.Street;
+                    contractor.Number = cvm.Number;
+                    contractor.ApartmentNumber = cvm.ApartmentNumber;
+                    contractor.ZipCode = cvm.ZipCode;
+                    contractor.City = cvm.City;
+                    contractor.PersonToInvoice = cvm.PersonToInvoice;
+                        
+                    // override all properties that could be set from server-side only
                     contractor.ModifyDate = DateTime.Now;
 
                     //save the changes into the db
                     DbContext.SaveChanges();
 
-                    //return updated Contractor to the clinet
+                    //return updated Contractor to the client
                     return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
                 }
+
             }
                 //return a HTTP Status 404 (Not Found) if contractor has not been found
                 return NotFound(new { Error = String.Format("Contractor ID {0} not found", id) });
@@ -117,6 +125,7 @@ namespace SelliT.Controllers
         #region HttpDelete
         /// DELETE: api/constructors/{id}
         /// Return: Removes an existing Contractor, returning a HTTP status 200 (ok) when done.
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             var contractor = DbContext.Contractor.Where(c => c.ID == id).FirstOrDefault();
@@ -195,7 +204,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 3;
+                return 20;
             }
         }
 
@@ -204,7 +213,7 @@ namespace SelliT.Controllers
         {
             get
             {
-                return 5;
+                return 30;
             }
         }
         #endregion Private Members

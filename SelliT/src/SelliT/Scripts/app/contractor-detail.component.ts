@@ -7,7 +7,7 @@ import {ContractorService} from "./contractor.service";
     selector: "contractor-detail",
     template: `
         <div *ngIf="contractor" class="details">
-            <h2>{{contractor.Name}} - Detail View</h2>
+            <h2>{{contractor.Name}} - Details </h2>
             <ul>
                 <li>
                     <label>Name:</label>
@@ -39,9 +39,18 @@ import {ContractorService} from "./contractor.service";
                 </li>
                 <li>
                     <label>Authorized Person:</label>
-                    <input [(ngModel)]="contractor.PerasonToInvoice" placeholder="Insert..."/>
+                    <input [(ngModel)]="contractor.PersonToInvoice" placeholder="Insert..."/>
                 </li>
             </ul>
+            <div *ngIf="contractor.ID.indexOf('new') == 0" class="insert">
+                <input type="button" value="Save" (click)="onInsert(contractor)" />
+                <input type="button" value="Cancel" (click)="onBack()" />
+            </div>
+            <div *ngIf="contractor.ID.indexOf('new') == -1" class="update">
+                <input type="button" value="Update" (click)="onUpdate(contractor)" />
+                <input type="button" value="Delete" (click)="onDelete(contractor)" />
+                <input type="button" value="Cancel" (click)="onBack()" />
+            </div>
         </div>
             `,
     styles: [`
@@ -68,7 +77,11 @@ export class ContractorDetailComponent {
     ngOnInit() {
         var id = this.activatedRoute.snapshot.params['id'];
         console.log("id: " + id);
-        if (id)
+        if (id == "new") {
+            console.log("inserting a new contractor");
+            this.contractor = new Contractor(id, "New Contractor", null, null, null, null, null, null, null);
+        }
+        else if (id)
         {
             this.contractorService.get(id)
                 .subscribe(contractor => this.contractor = contractor);
@@ -77,6 +90,43 @@ export class ContractorDetailComponent {
             console.log("Invalid id: " );
                 this.router.navigate([""]);
             }
-
     }
+
+    onInsert(item: Contractor) {
+        this.contractorService.add(item).subscribe(
+            (data) => {
+                this.contractor = data;
+                console.log("Item " + this.contractor.ID + " has been added.");
+                this.router.navigate(["contractor"]);
+            },
+            (error) => console.log(error)
+        );
+    }
+
+    onUpdate(item: Contractor) {
+        this.contractorService.update(item).subscribe(
+            (data) => {
+                this.contractor = data;
+                console.log("Item " + this.contractor.ID + " has been updated.");
+                this.router.navigate([""]);
+            },
+            (error) => console.log(error)
+        );
+    }
+    onDelete(item: Contractor) {
+        var id = item.ID;
+        this.contractorService.delete(id).subscribe(
+            (data) => {
+                console.log("Item " + id + " has been deleted.");
+                this.router.navigate([""]);
+            },
+            (error) => console.log(error)
+        );
+    }
+
+    onBack() {
+        this.router.navigate(["contractor"]);
+    }
+
+
 }

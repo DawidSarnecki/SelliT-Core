@@ -26,7 +26,7 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "sellitapp",
-                        template: "\n        <div>\n            <a class=\"home\" [routerLink]=\"['']\">Contractors</a>\n            | <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n        </div>\n        <router-outlet></router-outlet>\n        "
+                        template: "\n        <div>\n            <a class=\"contractor\" [routerLink]=\"['contractor']\">Contractors</a>\n            | <a class=\"add\" [routerLink]=\"['contractor', 'add']\"> + New contractor</a>\n            | <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n        </div>\n        <router-outlet></router-outlet>\n        "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

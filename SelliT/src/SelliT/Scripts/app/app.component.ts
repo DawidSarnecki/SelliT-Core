@@ -3,7 +3,8 @@
     selector: "sellitapp",
     template: `
         <div>
-            <a class="home" [routerLink]="['']">Contractors</a>
+            <a class="contractor" [routerLink]="['contractor']">Contractors</a>
+            | <a class="add" [routerLink]="['contractor', 'new']"> + New contractor</a>
             | <a class="login" [routerLink]="['login']">Login</a>
         </div>
         <router-outlet></router-outlet>

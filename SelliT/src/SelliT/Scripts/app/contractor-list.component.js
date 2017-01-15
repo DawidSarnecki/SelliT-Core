@@ -35,7 +35,7 @@ System.register(["@angular/core", "@angular/router", "./contractor.service"], fu
                 ContractorListComponent.prototype.getLatest = function () {
                     var _this = this;
                     this.contractorService.getLatest()
-                        .subscribe(function (latestContractors) { return _this.contractors = latestContractors; }, function (error) { return _this.errorMsg = error; });
+                        .subscribe(function (latestContractors) { return _this.contractors = latestContractors; }, function (error) { return _this.errorInfo = error; });
                 };
                 ContractorListComponent.prototype.onSelect = function (contractor) {
                     this.selectedContractor = contractor;
