@@ -2,10 +2,11 @@
 @Component({
     selector: "sellitapp",
     template: `
-        <h1>{{title}}</h1>
-        <h3>{{subTitle}}</h3>
-        <hr>
-        <contractor-list></contractor-list>
+        <div>
+            <a class="home" [routerLink]="['']">Contractors</a>
+            | <a class="login" [routerLink]="['login']">Login</a>
+        </div>
+        <router-outlet></router-outlet>
         `
 })
 export class AppComponent {

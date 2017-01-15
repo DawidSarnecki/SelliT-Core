@@ -11,28 +11,27 @@ System.register(["@angular/core"], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var AppComponent;
+    var ContractorComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                    this.title = "SelliT";
-                    this.subTitle = "invoicing app";
+            ContractorComponent = (function () {
+                function ContractorComponent() {
+                    this.title = " Contractors";
                 }
-                AppComponent = __decorate([
+                ContractorComponent = __decorate([
                     core_1.Component({
-                        selector: "sellitapp",
-                        template: "\n        <div>\n            <a class=\"home\" [routerLink]=\"['']\">Contractors</a>\n            | <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n        </div>\n        <router-outlet></router-outlet>\n        "
+                        selector: "contractor",
+                        template: "\n        <h1>{{title}}</h1>\n        <contractor-list></contractor-list>\n        "
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], ContractorComponent);
+                return ContractorComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("ContractorComponent", ContractorComponent);
         }
     }
 });
