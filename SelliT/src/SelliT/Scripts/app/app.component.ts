@@ -1,6 +1,14 @@
 ﻿import {Component} from "@angular/core";
 @Component({
-    selector: "invoicelist",
-    template: `<h1>InvoiceList</h1><div>Loading, give us a while...</div>`
+    selector: "sellitapp",
+    template: `
+        <h1>{{title}}</h1>
+        <h3>{{subTitle}}</h3>
+        <hr>
+        <contractor-list></contractor-list>
+        `
 })
-export class AppComponent { }
+export class AppComponent {
+    title = "SelliT";
+    subTitle = "invoicing app";
+}

@@ -20,7 +20,10 @@
       'http',
       'platform-browser',
       'platform-browser-dynamic',
-      'upgrade'
+      'upgrade',
+      'forms'
+     
+
     ];
 
     function packIndex(pkgName) {
