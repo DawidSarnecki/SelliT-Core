@@ -44,6 +44,10 @@ namespace SelliT.Controllers
         public IActionResult Get(string id)
         {
             var contractor = DbContext.Contractor.Where(c => c.ID == id).FirstOrDefault();
+            if (contractor==null)
+            {
+                return NotFound(new { Error = "not found" });
+            }
             return new JsonResult(TinyMapper.Map<ContractorViewModel>(contractor), DefaultJsonSettings);
         }
         #endregion RESTful Conventions

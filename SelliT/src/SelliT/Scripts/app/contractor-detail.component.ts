@@ -1,5 +1,7 @@
-﻿import {Component, Input} from "@angular/core";
+﻿import {Component, OnInit} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Contractor} from "./contractor";
+import {ContractorService} from "./contractor.service";
 
 @Component({
     selector: "contractor-detail",
@@ -55,5 +57,26 @@ import {Contractor} from "./contractor";
 })
 
 export class ContractorDetailComponent {
-    @Input("contractor") contractor: Contractor;
+    contractor: Contractor;
+
+    constructor(
+        private contractorService: ContractorService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute)
+    { }
+
+    ngOnInit() {
+        var id = this.activatedRoute.snapshot.params['id'];
+        console.log("id: " + id);
+        if (id)
+        {
+            this.contractorService.get(id)
+                .subscribe(contractor => this.contractor = contractor);
+        }
+        else {
+            console.log("Invalid id: " );
+                this.router.navigate([""]);
+            }
+
+    }
 }

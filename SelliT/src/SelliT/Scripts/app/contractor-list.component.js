@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./contractor.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./contractor.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,20 +10,24 @@ System.register(["@angular/core", "./contractor.service"], function(exports_1, c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, contractor_service_1;
+    var core_1, router_1, contractor_service_1;
     var ContractorListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
             function (contractor_service_1_1) {
                 contractor_service_1 = contractor_service_1_1;
             }],
         execute: function() {
             ContractorListComponent = (function () {
-                function ContractorListComponent(contractorService) {
+                function ContractorListComponent(contractorService, router) {
                     this.contractorService = contractorService;
+                    this.router = router;
                 }
                 ContractorListComponent.prototype.ngOnInit = function () {
                     this.getLatest();
@@ -36,14 +40,19 @@ System.register(["@angular/core", "./contractor.service"], function(exports_1, c
                 ContractorListComponent.prototype.onSelect = function (contractor) {
                     this.selectedContractor = contractor;
                     console.log("Selected contractor with ID: " + this.selectedContractor.ID);
+                    this.router.navigate(['contractor', this.selectedContractor.ID]);
                 };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', String)
+                ], ContractorListComponent.prototype, "class", void 0);
                 ContractorListComponent = __decorate([
                     core_1.Component({
                         selector: "contractor-list",
-                        template: "\n        <h2>Latest Used Contractors</h2>\n            <ul class=\"contractors\">\n                <li *ngFor=\"let contractor of contractors\"\n                    [class.selected]=\"contractor === selectedContractor\"\n                    (click) =\"onSelect(contractor)\">\n                    <span>{{contractor.Name}}</span>\n                </li>\n            </ul>\n            <contractor-detail *ngIf=\"selectedContractor\" [contractor]=\"selectedContractor\"></contractor-detail>\n            ",
+                        template: "\n        <h2>Latest Used Contractors</h2>\n            <ul class=\"contractors\">\n                <li *ngFor=\"let contractor of contractors\"\n                    [class.selected]=\"contractor === selectedContractor\"\n                    (click) =\"onSelect(contractor)\">\n                    <span>{{contractor.Name}}</span>\n                </li>\n            </ul>\n            ",
                         styles: ["\n        ul.contractors li { \n            cursor: pointer;}\n        ul.contractors li.selected { \n            background-color: #d1d1e0;}\n    "]
                     }), 
-                    __metadata('design:paramtypes', [contractor_service_1.ContractorService])
+                    __metadata('design:paramtypes', [contractor_service_1.ContractorService, router_1.Router])
                 ], ContractorListComponent);
                 return ContractorListComponent;
             }());
