@@ -1,0 +1,69 @@
+﻿import {Injectable} from "@angular/core";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {Product} from "./product";
+
+
+@Injectable()
+export class ProductService {
+
+    constructor(private http: Http) { }
+
+    // base web api URL
+    private baseUrl = "api/products/";
+
+    private handledError(error: Response) {
+        // print error in the console
+        console.error(error);
+        return Observable.throw(error.json().error || "A server error occurred");
+    }
+
+    // calls the [GET] /api/contractors/GetLatest/{n} Web API method to get the n items.
+    getLatest(num?: number) {
+        var url = this.baseUrl + "GetLatest/";
+        if (num != null) { url += num; }
+        return this.http.get(url)
+            .map(response => response.json())
+            .catch(this.handledError);
+    }
+
+    // calls the [GET] /api/contractors/{ID} Web API method to get the item with the giveN ID.
+    get(id?: string) {
+        if (id == null) { throw new Error("ID is required!"); }
+        var url = this.baseUrl + id;
+        return this.http.get(url)
+            .map(response => <Product>response.json())
+            .catch(this.handledError);
+    }
+
+    // calls the [POST] api/contractors/ Web API method to ADD a new item.
+    add(item: Product) {
+        var url = this.baseUrl;
+        return this.http.post(url, JSON.stringify(item), this.getRequestOptions())
+            .map(response => response.json())
+            .catch(this.handledError);
+    }
+
+
+    // calls the [PUT] api/contractors/ Web API method to UPDATE an existing item.
+    update(item: Product) {
+        var url = this.baseUrl + item.ID;
+        return this.http.put(url, JSON.stringify(item), this.getRequestOptions())
+            .map(response => response.json())
+            .catch(this.handledError);
+    }
+
+    // calls the [DELETE] api/contractors/ Web API method to DELETE an item with given ID.
+    delete(id: string) {
+        var url = this.baseUrl + id;
+        return this.http.delete(url)
+            .catch(this.handledError);
+    }
+
+    // return RequestOptions object to handle Json requests
+    private getRequestOptions() {
+        return new RequestOptions({
+            headers: new Headers({ "Content-Type": "application/json" })
+        });
+    }
+}

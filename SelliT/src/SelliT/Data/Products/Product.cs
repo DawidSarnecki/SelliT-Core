@@ -7,20 +7,7 @@ using System.Threading.Tasks;
 using SelliT.Data.Invoices;
 
 namespace SelliT.Data.Products
-{
-    public enum TaxRate
-    {
-         Vat23 = 23,
-         Vat8 = 8,
-         Vat7 = 7,
-         Vat4 = 4,
-         ZW = 0
-    }
-    public enum Unit
-    {
-        szt, kpl, l, kg
-    }
-
+{ 
     public class Product
     {
         #region Constructor
@@ -40,13 +27,13 @@ namespace SelliT.Data.Products
         [Required]
         public string Name { get; set; }
         [Required]
-        [DefaultValue(Unit.szt)]
-        public Unit Unit { get; set; }
+        [DefaultValue("szt.")]
+        public string Unit { get; set; }
         [Required]
         public double Price { get; set; }
         [Required]
-        [DefaultValue(TaxRate.Vat23)]
-        public TaxRate TaxRate { get; set; }
+        [DefaultValue(23)]
+        public int TaxRate { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
         [DefaultValue(null)]

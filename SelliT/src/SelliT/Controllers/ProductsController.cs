@@ -47,6 +47,98 @@ namespace SelliT.Controllers
         }
         #endregion RESTful Conventions
 
+        #region HttpPost
+        /// POST: api/constructors
+        /// Return: Creates a new Item and return it.
+        [HttpPost()]
+        public IActionResult Add([FromBody]ProductViewModel cvm)
+        {
+            if (cvm != null)
+            {
+                // create a new Product with the client-sent json data
+                var newItem = TinyMapper.Map<Product>(cvm);
+
+                // override any property that could be set from server-side only
+                newItem.ID = Guid.NewGuid().ToString();
+                newItem.CreateDate = DateTime.Now;
+                newItem.ModifyDate = DateTime.Now;
+
+                //add the new item
+                DbContext.Product.Add(newItem);
+
+                //save the changes into the db
+                DbContext.SaveChanges();
+
+                //return created Product to the clinet
+                return new JsonResult(TinyMapper.Map<ProductViewModel>(newItem), DefaultJsonSettings);
+            }
+            // return a generic HTTP Status 500 (Not Found) if the client request is invalid.
+            return new StatusCodeResult(500);
+        }
+        #endregion HttpPost
+
+        #region HttpPut
+        /// PUT: api/constructors/{id}
+        /// Return: Updates an existing Product and return it.
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, [FromBody]ProductViewModel cvm)
+        {
+            if (cvm != null)
+            {
+                // find Product with the given ID
+                var item = DbContext.Product.Where(i => i.ID == id).FirstOrDefault();
+
+                if (item != null)
+                {
+                    // handle the update
+                    item.Name = cvm.Name;
+                    item.Unit = cvm.Unit;
+                    item.Price = cvm.Price;
+                    item.TaxRate = cvm.TaxRate;
+
+                    // override all properties that could be set from server-side only
+                    item.ModifyDate = DateTime.Now;
+
+                    //save the changes into the db
+                    DbContext.SaveChanges();
+
+                    //return updated Product to the client
+                    return new JsonResult(TinyMapper.Map<ContractorViewModel>(item), DefaultJsonSettings);
+                }
+
+            }
+            //return a HTTP Status 404 (Not Found) if item has not been found
+            return NotFound(new { Error = String.Format("Product ID {0} not found", id) });
+        }
+        #endregion HttpPut
+
+
+        #region HttpDelete
+        /// DELETE: api/constructors/{id}
+        /// Return: Removes an existing Product, returning a HTTP status 200 (ok) when done.
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
+        {
+            var item = DbContext.Product.Where(c => c.ID == id).FirstOrDefault();
+
+            if (item != null)
+            {
+                // remove the item
+                DbContext.Product.Remove(item);
+
+                //save the changes into the db
+                DbContext.SaveChanges();
+
+                // return an HTTP Status 200 (OK).
+                return new OkResult();
+            }
+
+            //return a HTTP Status 404 (Not Found) if item has not been found
+            return NotFound(new { Error = String.Format("Product ID {0} not found", id) });
+        }
+
+        #endregion HttpDelete
+
 
         #region Attribute-based Routing
         /// GET: api/constructors/GetLatest
@@ -55,7 +147,11 @@ namespace SelliT.Controllers
         [HttpGet("GetLatest")]
         public IActionResult GetLatest()
         {
-            return GetLatest(DefaultNumberOfItems);
+            var products = DbContext.Product
+               .OrderByDescending(i => i.ModifyDate)
+               .ToArray();
+
+            return new JsonResult(ToProductViewModelList(products), DefaultJsonSettings);
         }
 
         /// GET: api/constructors/GetLatest/{n}
@@ -64,9 +160,8 @@ namespace SelliT.Controllers
         [HttpGet("GetLatest/{n}")]
         public IActionResult GetLatest(int n)
         {
-            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
             var products = DbContext.Product
-                .OrderByDescending(i => i.CreateDate)
+                .OrderByDescending(i => i.ModifyDate)
                 .Take(n).ToArray();
             return new JsonResult(ToProductViewModelList(products), DefaultJsonSettings);
         }
@@ -97,26 +192,10 @@ namespace SelliT.Controllers
             }
         }
 
-        /// Returns the default number of invoices to retrieve when using the parameterless overloads of the API methods retrieving item lists.
-        private int DefaultNumberOfItems
-        {
-            get
-            {
-                return 3;
-            }
-        }
-
-        /// Returns the maximum number using the API methods retrieving item lists.
-        private int MaxNumberOfItems
-        {
-            get
-            {
-                return 5;
-            }
-        }
         #endregion Private Members
 
 
     }
+ 
 
 }

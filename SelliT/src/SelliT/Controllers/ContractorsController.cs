@@ -31,11 +31,14 @@ namespace SelliT.Controllers
         #region RESTful Conventions
         #region HttpGet
         /// GET api/constructors/
-        /// Returns: Nothing: this method will raise a HttpNotFound HTTP exception
+        /// Returns: An array of all Json-serialized objects representing the last inserted/modified items.
         [HttpGet()]
         public IActionResult Get()
         {
-            return NotFound(new { Error = "not found" });
+            var contracors = DbContext.Contractor
+                .OrderByDescending(i => i.ModifyDate)
+                .ToArray();
+            return new JsonResult(ToContractorViewModelList(contracors), DefaultJsonSettings);
         }
 
         /// GET: api/constructors/{id}

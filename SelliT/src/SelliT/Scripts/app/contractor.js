@@ -6,7 +6,7 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Contractor = (function () {
-                function Contractor(ID, Name, Nip, Street, Number, ApartmentNumber, ZipCode, City, PersonToInvoice) {
+                function Contractor(ID, Name, Nip, Street, Number, ApartmentNumber, ZipCode, City, PersonToInvoice, Address) {
                     this.ID = ID;
                     this.Name = Name;
                     this.Nip = Nip;
@@ -16,6 +16,7 @@ System.register([], function(exports_1, context_1) {
                     this.ZipCode = ZipCode;
                     this.City = City;
                     this.PersonToInvoice = PersonToInvoice;
+                    this.Address = Address;
                 }
                 return Contractor;
             }());

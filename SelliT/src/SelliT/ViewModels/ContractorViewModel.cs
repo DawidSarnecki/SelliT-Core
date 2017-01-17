@@ -26,6 +26,17 @@ namespace SelliT.ViewModels
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string PersonToInvoice { get; set; }
+        public string Address {
+            get
+            {
+                if (ApartmentNumber != null)
+                {
+                    return Street + " " + Number + " / "+ ApartmentNumber +", " + ZipCode + " " + City;
+                }
+                else
+                    return Street + " " + Number + ", " + ZipCode + " " + City;
+            }
+        }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
         public DateTime RemoveDate { get; set; }

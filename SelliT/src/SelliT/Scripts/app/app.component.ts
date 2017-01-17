@@ -10,8 +10,8 @@
             | <a class="add" [routerLink]="['invoice', 'new']"> + New Invoice</a>
             | <a class="invoice" [routerLink]="['invoice']">Invoices</a>
             | <a class="contractor" [routerLink]="['contractor']">Contractors</a>
-            | <a class="product" [routerLink]="['invoice']">Products</a>
-            | <a class="product" [routerLink]="['settings']">Settings</a>
+            | <a class="product" [routerLink]="['product']">Products</a>
+            | <a class="settings" [routerLink]="['settings']">Settings</a>
             | <a class="login" [routerLink]="['login']">Login</a>
             </h4>
         </div>

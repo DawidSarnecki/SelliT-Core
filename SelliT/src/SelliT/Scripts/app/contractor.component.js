@@ -20,12 +20,11 @@ System.register(["@angular/core"], function(exports_1, context_1) {
         execute: function() {
             ContractorComponent = (function () {
                 function ContractorComponent() {
-                    this.title = " Contractors";
                 }
                 ContractorComponent = __decorate([
                     core_1.Component({
                         selector: "contractor",
-                        template: "\n        <h1>{{title}}</h1>\n        <h3><a class=\"add\" [routerLink]=\"['new']\"> + New contractor</a></h3>\n        <contractor-list></contractor-list>\n        "
+                        template: "\n        <h3><a class=\"add\" [routerLink]=\"['new']\"> + New contractor</a></h3>\n        <contractor-list></contractor-list>\n        "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ContractorComponent);

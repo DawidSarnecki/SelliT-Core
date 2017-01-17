@@ -6,9 +6,8 @@ import {ContractorService} from "./contractor.service";
 @Component({
     selector: "contractor-detail",
     template: `
-        <h3>Contractor edit</h3>
         <div *ngIf="contractor" class="details">
-            <h2>{{contractor.Name}} - Details </h2>
+            <h2>{{contractor.Name}} - Edit/Add </h2>
             <ul>
                 <li>
                     <label>Name:</label>
@@ -80,7 +79,7 @@ export class ContractorDetailComponent {
         console.log("id: " + id);
         if (id == "new") {
             console.log("inserting a new contractor");
-            this.contractor = new Contractor(id, "New Contractor", null, null, null, null, null, null, null);
+            this.contractor = new Contractor(id, "New Contractor", null, null, null, null, null, null, null, null);
         }
         else if (id)
         {
@@ -119,7 +118,7 @@ export class ContractorDetailComponent {
         this.contractorService.delete(id).subscribe(
             (data) => {
                 console.log("Item " + id + " has been deleted.");
-                this.router.navigate([""]);
+                this.router.navigate(["contractor"]);
             },
             (error) => console.log(error)
         );

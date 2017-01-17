@@ -203,6 +203,8 @@
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Invoices\InvoiceElement.cs"
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Migrations\20170115010200_Initial.cs"
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Migrations\20170115010200_Initial.Designer.cs"
+"D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Migrations\20170116195646_ModifyProductsTable.cs"
+"D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Migrations\20170116195646_ModifyProductsTable.Designer.cs"
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Migrations\SellitContextModelSnapshot.cs"
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Products\Product.cs"
 "D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Users\AppUser.cs"

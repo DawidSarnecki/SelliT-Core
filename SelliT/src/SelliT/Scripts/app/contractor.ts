@@ -8,6 +8,7 @@
         public ApartmentNumber: string,
         public ZipCode: string,
         public City: string,
-        public PersonToInvoice: string
+        public PersonToInvoice: string,
+        public Address: string
     ) { }
 }

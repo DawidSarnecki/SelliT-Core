@@ -18,7 +18,7 @@ namespace SelliT.Data
         {
 
             // Look for any Contractors.
-            if (context.InvoiceElement.Any())
+            if (context.Contractor.Any())
             {
                 return;   // DB has been seeded
             }

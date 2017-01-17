@@ -20,7 +20,7 @@ namespace SelliT.ViewModels
         public string Name { get; set; }
         public string Unit { get; set; }
         public double Price { get; set; }
-        public string TaxRate { get; set; }
+        public int TaxRate { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
         public DateTime RemoveDate { get; set; }

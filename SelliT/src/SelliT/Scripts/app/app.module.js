@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./app.routing", "./app.component", "./contractor.component", "./contractor-detail.component", "./contractor-list.component", "./contractor.service", "./login.component", "./page-not-found.component"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./app.routing", "./app.component", "./contractor.component", "./contractor-detail.component", "./contractor-list.component", "./invoice.component", "./contractor.service", "./product.component", "./product-detail.component", "./product-list.component", "./product.service", "./login.component", "./page-not-found.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, platform_browser_1, http_1, forms_1, router_1, app_routing_1, app_component_1, contractor_component_1, contractor_detail_component_1, contractor_list_component_1, contractor_service_1, login_component_1, page_not_found_component_1;
+    var core_1, platform_browser_1, http_1, forms_1, router_1, app_routing_1, app_component_1, contractor_component_1, contractor_detail_component_1, contractor_list_component_1, invoice_component_1, contractor_service_1, product_component_1, product_detail_component_1, product_list_component_1, product_service_1, login_component_1, page_not_found_component_1;
     var AppModule;
     return {
         setters:[
@@ -45,8 +45,23 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
             function (contractor_list_component_1_1) {
                 contractor_list_component_1 = contractor_list_component_1_1;
             },
+            function (invoice_component_1_1) {
+                invoice_component_1 = invoice_component_1_1;
+            },
             function (contractor_service_1_1) {
                 contractor_service_1 = contractor_service_1_1;
+            },
+            function (product_component_1_1) {
+                product_component_1 = product_component_1_1;
+            },
+            function (product_detail_component_1_1) {
+                product_detail_component_1 = product_detail_component_1_1;
+            },
+            function (product_list_component_1_1) {
+                product_list_component_1 = product_list_component_1_1;
+            },
+            function (product_service_1_1) {
+                product_service_1 = product_service_1_1;
             },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
@@ -66,6 +81,10 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                             contractor_component_1.ContractorComponent,
                             contractor_list_component_1.ContractorListComponent,
                             contractor_detail_component_1.ContractorDetailComponent,
+                            invoice_component_1.InvoiceComponent,
+                            product_component_1.ProductComponent,
+                            product_list_component_1.ProductListComponent,
+                            product_detail_component_1.ProductDetailComponent,
                             login_component_1.LoginComponent,
                             page_not_found_component_1.PageNotFoundComponent
                         ],
@@ -79,7 +98,8 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                         ],
                         // providers
                         providers: [
-                            contractor_service_1.ContractorService
+                            contractor_service_1.ContractorService,
+                            product_service_1.ProductService
                         ],
                         bootstrap: [
                             app_component_1.AppComponent

@@ -6,20 +6,52 @@ import {ContractorService} from "./contractor.service";
 @Component({
     selector: "contractor-list",
     template: `
-        <h3>Latest Used Contractors</h3>
-            <ul class="contractors">
-                <li *ngFor="let contractor of contractors"
-                    [class.selected]="contractor === selectedContractor"
-                    (click) ="onSelect(contractor)">
-                    <span>{{contractor.Name}}</span>
-                </li>
-            </ul>
+        <div id="list">
+            <table id="items">
+                <caption>Contractors</caption>
+                <tr>
+                    <th>Name</th>
+                    <th>NIP</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                    <th>Apt. No.</th>
+                    <th>ZIP</th>
+                    <th>City</th>
+                    <th>Authorized pers.</th>
+                </tr>
+                <tr *ngFor="let contractor of contractors" (click) ="onSelect(contractor)">
+                    <td>{{contractor.Name}}</td>
+                    <td>{{contractor.Nip}}</td>
+                    <td>{{contractor.Street}}</td>
+                    <td>{{contractor.Number}}</td>
+                    <td>{{contractor.ApartmentNumber}}</td>
+                    <td>{{contractor.ZipCode}}</td>
+                    <td>{{contractor.City}}</td>
+                    <td>{{contractor.PersonToInvoice}}</td>
+                </tr>
+            </table>
+        <div>
             `,
     styles: [`
-        ul.contractors li { 
-            cursor: pointer;}
-        ul.contractors li.selected { 
-            background-color: #d1d1e0;}
+        #list {overflow-x:auto;}
+        #items {
+            border-collapse: collapse;
+            width: 100%;}
+        #items td, #items th, #items caption {
+            border: 1px solid #ddd;
+            padding: 8px;}
+        #items caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            letter-spacing: 2px;}
+        #items tr:nth-child(even){background-color: #f2f2f2;}
+        #items tr:hover {background-color: #4db8ff;}
+        #items th, #items caption {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: black;
+            color: white;}
     `]
 })
 

@@ -141,7 +141,8 @@ namespace SelliT.Data.Migrations
 
                     b.Property<int>("TaxRate");
 
-                    b.Property<int>("Unit");
+                    b.Property<string>("Unit")
+                        .IsRequired();
 
                     b.HasKey("ID");
 

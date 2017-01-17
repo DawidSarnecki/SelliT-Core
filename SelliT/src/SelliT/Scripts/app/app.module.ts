@@ -12,7 +12,12 @@ import {AppComponent} from "./app.component";
 import {ContractorComponent} from "./contractor.component";
 import {ContractorDetailComponent} from "./contractor-detail.component";
 import {ContractorListComponent} from "./contractor-list.component";
+import {InvoiceComponent} from "./invoice.component";
 import {ContractorService} from "./contractor.service";
+import {ProductComponent} from "./product.component";
+import {ProductDetailComponent} from "./product-detail.component";
+import {ProductListComponent} from "./product-list.component";
+import {ProductService} from "./product.service";
 import {LoginComponent} from "./login.component"; 
 import {PageNotFoundComponent} from "./page-not-found.component";
 
@@ -24,6 +29,10 @@ import {PageNotFoundComponent} from "./page-not-found.component";
         ContractorComponent,
         ContractorListComponent,
         ContractorDetailComponent,
+        InvoiceComponent,
+        ProductComponent,
+        ProductListComponent,
+        ProductDetailComponent,
         LoginComponent,
         PageNotFoundComponent
     ],
@@ -39,7 +48,8 @@ import {PageNotFoundComponent} from "./page-not-found.component";
 
     // providers
     providers: [
-        ContractorService
+        ContractorService,
+        ProductService
     ],
     bootstrap: [
         AppComponent
