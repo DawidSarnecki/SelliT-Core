@@ -21,6 +21,20 @@ namespace SelliT.ViewModels
         public string Unit { get; set; }
         public double Price { get; set; }
         public int TaxRate { get; set; }
+        public double PriceWithTax
+        {
+            get
+            {
+                if (TaxRate != 0)
+                {
+                    return (Math.Round(Price + TaxRate * Price / 100,2));
+                }
+                else
+                {
+                    return (Math.Round(Price,2));
+                }
+            }     
+        }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
         public DateTime RemoveDate { get; set; }

@@ -199,6 +199,7 @@ D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\ContractorsContr
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\InvoiceElementsController.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\InvoicesController.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\ProductsController.cs
+D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\UsersController.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Controllers\ValuesController.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\Dbinitializer.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\Data\SellitContext.cs
@@ -216,3 +217,4 @@ D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\ViewModels\ContractorViewMod
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\ViewModels\InvoiceElementsViewModel.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\ViewModels\InvoiceViewModel.cs
 D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\ViewModels\ProductViewModel.cs
+D:\MVC NET\SellitCore\SelliT-Core\SelliT\src\SelliT\ViewModels\UserViewModel.cs

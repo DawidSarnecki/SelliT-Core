@@ -12,14 +12,16 @@ import {ProductService} from "./product.service";
                 <tr>
                     <th>Name</th>
                     <th>Unit</th>
-                    <th>Price [PLN]</th>
-                    <th>Tax Rate [%]</th>
+                    <th>Price Netto [PLN]</th>
+                    <th>VAT [%]</th>
+                    <th>Price Brutto [PLN]</th>
                 </tr>
                 <tr *ngFor="let product of products" (click) ="onSelect(product)">
                     <td>{{product.Name}}</td>
                     <td>{{product.Unit}}</td>
                     <td>{{product.Price}}</td>
                     <td>{{product.TaxRate}}</td>
+                    <td>{{product.PriceWithTax}}</td>
                 </tr>
             </table>
         <div>

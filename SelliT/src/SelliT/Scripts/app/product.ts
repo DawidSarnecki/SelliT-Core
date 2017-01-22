@@ -3,7 +3,8 @@
         public ID: string,
         public Name: string,
         public Unit: string,
-        public Price: number,
-        public TaxRate: number
+        public Price: string,
+        public TaxRate: string,
+        public PriceWithTax: string
     ) { }
 }

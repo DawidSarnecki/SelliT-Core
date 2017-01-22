@@ -7,7 +7,8 @@ import {InvoiceComponent} from "./invoice.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {ProductComponent} from "./product.component";
 import {ProductDetailComponent} from "./product-detail.component";
-
+import {UserComponent} from "./user.component";
+import {UserDetailComponent} from "./user-detail.component";
 
 const appRoutes: Routes = [
     {
@@ -37,6 +38,14 @@ const appRoutes: Routes = [
     {
         path: "product/:id",
         component: ProductDetailComponent
+    },
+    {
+        path: "settings",
+        component: UserComponent
+    },
+    {
+        path: "settings/:id",
+        component: UserDetailComponent
     },
     {
         path: '**',

@@ -39,7 +39,7 @@ System.register(["@angular/core", "@angular/router", "./product", "./product.ser
                     console.log("id: " + id);
                     if (id == "new") {
                         console.log("inserting a new product");
-                        this.product = new product_1.Product(id, "New Product", null, null, null);
+                        this.product = new product_1.Product(id, "New Product", null, null, null, null);
                     }
                     else if (id) {
                         this.itemService.get(id)

@@ -6,12 +6,13 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Product = (function () {
-                function Product(ID, Name, Unit, Price, TaxRate) {
+                function Product(ID, Name, Unit, Price, TaxRate, PriceWithTax) {
                     this.ID = ID;
                     this.Name = Name;
                     this.Unit = Unit;
                     this.Price = Price;
                     this.TaxRate = TaxRate;
+                    this.PriceWithTax = PriceWithTax;
                 }
                 return Product;
             }());

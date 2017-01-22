@@ -20,6 +20,10 @@ import {ProductListComponent} from "./product-list.component";
 import {ProductService} from "./product.service";
 import {LoginComponent} from "./login.component"; 
 import {PageNotFoundComponent} from "./page-not-found.component";
+import {UserComponent} from "./user.component";
+import {UserDetailComponent} from "./user-detail.component";
+import {UserListComponent} from "./user-list.component";
+import {UserService} from "./user.service";
 
 @NgModule({
 
@@ -34,6 +38,9 @@ import {PageNotFoundComponent} from "./page-not-found.component";
         ProductListComponent,
         ProductDetailComponent,
         LoginComponent,
+        UserComponent,
+        UserListComponent,
+        UserDetailComponent,
         PageNotFoundComponent
     ],
 
@@ -49,7 +56,9 @@ import {PageNotFoundComponent} from "./page-not-found.component";
     // providers
     providers: [
         ContractorService,
-        ProductService
+        ProductService,
+        UserService
+
     ],
     bootstrap: [
         AppComponent

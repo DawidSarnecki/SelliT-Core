@@ -4,6 +4,7 @@ using SelliT.Data;
 using SelliT.Data.Invoices;
 using SelliT.Data.Contractors;
 using SelliT.Data.Products;
+using SelliT.Data.Users;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,10 +19,38 @@ namespace SelliT.Data
         {
 
             // Look for any Contractors.
-            if (context.Contractor.Any())
+            if (context.User.Any())
             {
                 return;   // DB has been seeded
             }
+            
+            #region New Users
+            var users = new AppUser[]
+            {
+                new AppUser
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Name = String.Format("USER"),
+                    UserName = String.Format("admin"),
+                    Email = String.Format("admin@admin.pl"),
+                    Nip = "000-000-00-00",
+                    Street = "CENTRALNA",
+                    Number = "15A",
+                    ZipCode = "15-150",
+                    City = "GDANSK",
+                    PersonToInvoice = "KOWAL B.",
+                    CreateDate = DateTime.Now,
+                    ModifyDate = DateTime.Now
+                }
+            };
+
+            foreach (AppUser c in users)
+            {
+                context.User.Add(c);
+            }
+            context.SaveChanges();
+
+            #endregion New Contractors
 
             #region New Contractors
             var contractors = new Contractor[]

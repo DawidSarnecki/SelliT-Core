@@ -63,7 +63,7 @@ export class ProductDetailComponent {
         console.log("id: " + id);
         if (id == "new") {
             console.log("inserting a new product");
-            this.product = new Product(id, "New Product", null, null, null);
+            this.product = new Product(id, "New Product", null, null, null,null);
         }
         else if (id) {
             this.itemService.get(id)
