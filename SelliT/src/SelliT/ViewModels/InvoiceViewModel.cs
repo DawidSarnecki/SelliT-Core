@@ -21,10 +21,13 @@ namespace SelliT.ViewModels
            
         #region Properties
         public string ID { get; set; }
+        public string Number { get; set; }
         public string ContractorID { get; set; }
         public string PayForm { get; set; }
         public bool IsPaid { get; set; }
         public string UserId { get; set; }
+        public IList<ContractorViewModel> Contractor { get; set; }
+        public IList<InvoiceElementsViewModel> Elements { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime SaleDate { get; set; }
         public DateTime PaymentDate { get; set; }

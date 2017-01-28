@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SelliT.ViewModels;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SelliT.Data;
+using SelliT.Data.Contractors;
 using SelliT.Data.Invoices;
 using Nelibur.ObjectMapper;
 
@@ -32,8 +34,138 @@ namespace SelliT.Controllers
         [HttpGet()]
         public IActionResult Get()
         {
-            return NotFound(new { Error = "not found" });
+            var invoices = DbContext.Invoice
+                .OrderByDescending(i => i.CreateDate)
+                .ToArray();
+
+            return new JsonResult(ToInvoiceViewModelList(invoices), DefaultJsonSettings);
         }
+
+        /// GET api/invoices/GetAll
+        /// 
+        [HttpGet("GetAll_3")]
+        public IActionResult GetAll_3()
+        {
+            IEnumerable<Invoice> invoices = DbContext.Invoice;
+            IEnumerable<Contractor> contractors = DbContext.Contractor;
+            IEnumerable<InvoiceElement> elements = DbContext.InvoiceElement;
+
+            var results =
+                from e in elements
+                group e by e.InvoiceID into eg
+                join invoice in invoices
+                on eg.FirstOrDefault().InvoiceID equals invoice.ID
+                orderby invoice.ModifyDate
+                select eg;
+
+            List<Invoice> _invoice = DbContext.Invoice.ToList();
+            List<InvoiceElement> _element = DbContext.InvoiceElement.ToList();
+
+
+            foreach (var result in results)
+            {
+                Console.Write(result.FirstOrDefault().ID);
+                foreach (var el in result)
+                    return this.Ok(el);
+            }
+            return this.Ok();
+        }
+
+
+        [HttpGet("GetAll_2")]
+        public IActionResult GetAll_2()
+        {
+            IEnumerable<Invoice> invoices = DbContext.Invoice;
+            IEnumerable<Contractor> contractors = DbContext.Contractor;
+            IEnumerable<InvoiceElement> elements = DbContext.InvoiceElement;
+
+            var results =
+                from e in elements
+                group e by e.InvoiceID into eg
+                join invoice in invoices
+                on eg.FirstOrDefault().InvoiceID equals invoice.ID
+                orderby invoice.ModifyDate
+                select eg;
+
+            foreach (var result in results) { 
+                Console.Write(result.FirstOrDefault().ID);
+                foreach (var el in result)
+                    return this.Ok(el);
+            }
+            return this.Ok();
+        }
+
+        ///GET api/invoices/GetAll -- return all values from all tables avoiding ID
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+
+            IList<Contractor> contractors = DbContext.Contractor.ToList();
+            IList<Invoice> invoices = DbContext.Invoice.ToList();
+            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
+            IList<InvoiceViewModel> result = invoices.Select(i => new InvoiceViewModel
+            {
+                ID = i.ID,
+                Number = i.Number,
+                Contractor = contractors.Select(c => new ContractorViewModel
+                {
+                    Name = c.Name,
+                    Nip = c.Nip,
+                }).ToList(),
+                Elements = elements.Select(e => new InvoiceElementsViewModel
+                {
+                    ID = e.ID,
+                    PositionNumber = e.PositionNumber,
+                    ProductID = e.ProductID,
+                    Quantity = e.Quantity,
+                }).ToList(),
+            }).ToList();
+
+            //return this.Ok(Iresult);
+            return new JsonResult(result, DefaultJsonSettings);
+        }
+
+        [HttpGet("GetAllUsingId")]
+        public IActionResult GetAllUsingId()
+        {
+            IList<Contractor> contractors = DbContext.Contractor.ToList();
+            IList<Invoice> invoices = DbContext.Invoice.ToList();
+            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
+
+            IEnumerable<InvoiceViewModel> Iresult = invoices.Select(i => new InvoiceViewModel
+            {
+                ID = i.ID,
+                Number = i.Number,
+                Contractor = contractors.Select(c => new ContractorViewModel
+                {
+                    Name = c.Name,
+                    Nip = c.Nip,
+                }).Where(c => c.ID == i.ContractorID).ToList(),
+                Elements = elements.Select(e => new InvoiceElementsViewModel
+                {
+                    ID = e.ID,
+                    PositionNumber = e.PositionNumber,
+                    ProductID = e.ProductID,
+                    Quantity = e.Quantity,
+                }).Where(e => e.InvoiceID == i.ID).ToList(),
+            }).ToList();
+
+            return new JsonResult(Iresult, DefaultJsonSettings);
+
+            /*
+            // Query expression 
+            from customer in customers
+            join order in orders on customer.Id equals order.CustomerId
+            select customer.Name + ": " + order.Price
+
+            // Translation 
+            customers.Join(orders,
+            customer => customer.Id,
+            order => order.CustomerId,
+            (customer, order) => customer.Name + ": " + order.Price)
+            */
+        }
+
 
         /// GET: api/invoices/{id}
         /// ROUTING TYPE: attribute-based
@@ -72,41 +204,6 @@ namespace SelliT.Controllers
             return new JsonResult(ToInvoiceViewModelList(invoices), DefaultJsonSettings);
         }
 
-        /// <summary>
-        /// GET: api/items/GetLatest
-        /// ROUTING TYPE: attribute-based
-        /// Returns: An array of a default number of Json-serialized objects representing the last inserted items.
-        /// 
-        /*
- 
-        [HttpGet("GetAllDetail")]
-        public IActionResult GetAllDetail()
-        {
-            var invoices = DbContext.Invoice;
-            var elements = DbContext.InvoiceElement;
-            var invoiceDetail =
-                from i in invoices
-                join el in elements on i.ID equals el.InvoiceID into ivoiceEl
-                select new
-                {
-                    Invoice = invoices,
-                    InvoiceElements = from el2 in ivoiceEl
-                                     select el2
-                };
-            //invoiceDetail.ToArray();
-            // foreach (InvoiceElement e in i.InvoiceElements.Where(e => e.InvoiceID
-            //JsonResult jsonInvoice, jsonElement;
-            foreach (var inv in invoiceDetail)
-            {
-                foreach (var elem in inv.InvoiceElements)
-                {
-                    return new JsonResult(ToInvoiceElementViewModelList(inv.InvoiceElements.ToArray()), DefaultJsonSettings);
-                }
-                return new JsonResult(ToInvoiceViewModelList(inv.Invoice.ToArray()), DefaultJsonSettings);
-            }
-
-        }
-        */
 
         /// <summary>
         /// GET: api/invoices/GetAllElements

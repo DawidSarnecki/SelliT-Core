@@ -1,7 +1,7 @@
-System.register(["@angular/router", "./contractor.component", "./contractor-detail.component", "./login.component", "./invoice.component", "./page-not-found.component", "./product.component", "./product-detail.component", "./user.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./contractor.component", "./contractor-detail.component", "./login.component", "./invoice.component", "./page-not-found.component", "./product.component", "./product-detail.component", "./user.component", "./user-detail.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, contractor_component_1, contractor_detail_component_1, login_component_1, invoice_component_1, page_not_found_component_1, product_component_1, product_detail_component_1, user_component_1;
+    var router_1, contractor_component_1, contractor_detail_component_1, login_component_1, invoice_component_1, page_not_found_component_1, product_component_1, product_detail_component_1, user_component_1, user_detail_component_1;
     var appRoutes, AppRoutingProviders, AppRouting;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(["@angular/router", "./contractor.component", "./contractor-deta
             },
             function (user_component_1_1) {
                 user_component_1 = user_component_1_1;
+            },
+            function (user_detail_component_1_1) {
+                user_detail_component_1 = user_detail_component_1_1;
             }],
         execute: function() {
             appRoutes = [
@@ -65,6 +68,10 @@ System.register(["@angular/router", "./contractor.component", "./contractor-deta
                 {
                     path: "settings",
                     component: user_component_1.UserComponent
+                },
+                {
+                    path: "settings/:id",
+                    component: user_detail_component_1.UserDetailComponent
                 },
                 {
                     path: '**',

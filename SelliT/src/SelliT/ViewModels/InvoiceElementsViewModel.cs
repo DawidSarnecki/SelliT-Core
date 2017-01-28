@@ -22,6 +22,7 @@ namespace SelliT.ViewModels
         #region Properties
 
         public string ID { get; set; }
+        public string InvoiceID { get; set; }
         public string ProductID { get; set; }
         public int PositionNumber { get; set; }
         public int Quantity { get; set; }

@@ -2,9 +2,9 @@
 import {Router} from "@angular/router";
 import {Invoice} from "./invoice";
 @Component({
-    selector: "invoice",
+    selector: "invoice-detail",
     template: `
-        <h1>{{title}}</h1>
+        <h1>{{title}} DETAILS </h1>
         <div>
             TODO.
         </div>
@@ -102,12 +102,7 @@ import {Invoice} from "./invoice";
           </div>
 `
 })
-export class InvoiceComponent {
+export class InvoiceDetailComponent {
     title = "Invoice";
-
-
-
-
-
 
 }
