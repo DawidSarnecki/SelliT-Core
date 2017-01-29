@@ -18,21 +18,31 @@ export class ContractorService {
         return Observable.throw(error.json().error || "A server error occurred");
     }
 
+    // calls the [GET] /api/contractors/{ID} Web API method 
+    // to get the item with the given ID or all items if ID is empty.
+    get(id?: string) {
+        if (id == null || id == "") {
+            var url = this.baseUrl;
+            return this.http.get(url)
+                .map(response => <Contractor>response.json())
+                .catch(this.handledError);
+        }
+        else {
+            var url = this.baseUrl + id;
+            return this.http.get(url)
+                .map(response => <Contractor>response.json())
+                .catch(this.handledError);
+        }
+
+    }
+
+
     // calls the [GET] /api/contractors/GetLatest/{n} Web API method to get the n items.
     getLatest(num?: number) {
         var url = this.baseUrl + "GetLatest/";
         if (num != null) { url += num; }
         return this.http.get(url)
             .map(response => response.json())
-            .catch(this.handledError);
-    }
-
-    // calls the [GET] /api/contractors/{ID} Web API method to get the item with the giveN ID.
-    get(id?: string) {
-        if (id == null) { throw new Error("ID is required!"); }
-        var url = this.baseUrl + id;
-        return this.http.get(url)
-            .map(response => <Contractor>response.json())
             .catch(this.handledError);
     }
 

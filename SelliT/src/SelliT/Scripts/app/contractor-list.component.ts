@@ -64,11 +64,11 @@ export class ContractorListComponent implements OnInit {
     constructor(private contractorService: ContractorService, private router: Router) { }
 
     ngOnInit() {
-        this.getLatest();
+        this.get();
     }
 
-    getLatest() {
-        this.contractorService.getLatest()
+    get() {
+        this.contractorService.get()
             .subscribe(latestContractors => this.contractors = latestContractors,
             error => this.errorInfo = <any>error
             );

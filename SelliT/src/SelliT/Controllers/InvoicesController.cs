@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SelliT.Data;
 using SelliT.Data.Contractors;
+using SelliT.Data.Products;
 using SelliT.Data.Invoices;
 using Nelibur.ObjectMapper;
 
@@ -41,132 +42,7 @@ namespace SelliT.Controllers
             return new JsonResult(ToInvoiceViewModelList(invoices), DefaultJsonSettings);
         }
 
-        /// GET api/invoices/GetAll
-        /// 
-        [HttpGet("GetAll_3")]
-        public IActionResult GetAll_3()
-        {
-            IEnumerable<Invoice> invoices = DbContext.Invoice;
-            IEnumerable<Contractor> contractors = DbContext.Contractor;
-            IEnumerable<InvoiceElement> elements = DbContext.InvoiceElement;
-
-            var results =
-                from e in elements
-                group e by e.InvoiceID into eg
-                join invoice in invoices
-                on eg.FirstOrDefault().InvoiceID equals invoice.ID
-                orderby invoice.ModifyDate
-                select eg;
-
-            List<Invoice> _invoice = DbContext.Invoice.ToList();
-            List<InvoiceElement> _element = DbContext.InvoiceElement.ToList();
-
-
-            foreach (var result in results)
-            {
-                Console.Write(result.FirstOrDefault().ID);
-                foreach (var el in result)
-                    return this.Ok(el);
-            }
-            return this.Ok();
-        }
-
-
-        [HttpGet("GetAll_2")]
-        public IActionResult GetAll_2()
-        {
-            IEnumerable<Invoice> invoices = DbContext.Invoice;
-            IEnumerable<Contractor> contractors = DbContext.Contractor;
-            IEnumerable<InvoiceElement> elements = DbContext.InvoiceElement;
-
-            var results =
-                from e in elements
-                group e by e.InvoiceID into eg
-                join invoice in invoices
-                on eg.FirstOrDefault().InvoiceID equals invoice.ID
-                orderby invoice.ModifyDate
-                select eg;
-
-            foreach (var result in results) { 
-                Console.Write(result.FirstOrDefault().ID);
-                foreach (var el in result)
-                    return this.Ok(el);
-            }
-            return this.Ok();
-        }
-
-        ///GET api/invoices/GetAll -- return all values from all tables avoiding ID
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
-        {
-
-            IList<Contractor> contractors = DbContext.Contractor.ToList();
-            IList<Invoice> invoices = DbContext.Invoice.ToList();
-            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
-            IList<InvoiceViewModel> result = invoices.Select(i => new InvoiceViewModel
-            {
-                ID = i.ID,
-                Number = i.Number,
-                Contractor = contractors.Select(c => new ContractorViewModel
-                {
-                    Name = c.Name,
-                    Nip = c.Nip,
-                }).ToList(),
-                Elements = elements.Select(e => new InvoiceElementsViewModel
-                {
-                    ID = e.ID,
-                    PositionNumber = e.PositionNumber,
-                    ProductID = e.ProductID,
-                    Quantity = e.Quantity,
-                }).ToList(),
-            }).ToList();
-
-            //return this.Ok(Iresult);
-            return new JsonResult(result, DefaultJsonSettings);
-        }
-
-        [HttpGet("GetAllUsingId")]
-        public IActionResult GetAllUsingId()
-        {
-            IList<Contractor> contractors = DbContext.Contractor.ToList();
-            IList<Invoice> invoices = DbContext.Invoice.ToList();
-            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
-
-            IEnumerable<InvoiceViewModel> Iresult = invoices.Select(i => new InvoiceViewModel
-            {
-                ID = i.ID,
-                Number = i.Number,
-                Contractor = contractors.Select(c => new ContractorViewModel
-                {
-                    Name = c.Name,
-                    Nip = c.Nip,
-                }).Where(c => c.ID == i.ContractorID).ToList(),
-                Elements = elements.Select(e => new InvoiceElementsViewModel
-                {
-                    ID = e.ID,
-                    PositionNumber = e.PositionNumber,
-                    ProductID = e.ProductID,
-                    Quantity = e.Quantity,
-                }).Where(e => e.InvoiceID == i.ID).ToList(),
-            }).ToList();
-
-            return new JsonResult(Iresult, DefaultJsonSettings);
-
-            /*
-            // Query expression 
-            from customer in customers
-            join order in orders on customer.Id equals order.CustomerId
-            select customer.Name + ": " + order.Price
-
-            // Translation 
-            customers.Join(orders,
-            customer => customer.Id,
-            order => order.CustomerId,
-            (customer, order) => customer.Name + ": " + order.Price)
-            */
-        }
-
-
+    
         /// GET: api/invoices/{id}
         /// ROUTING TYPE: attribute-based
         /// Return: A Json-serialized object representing a single item.
@@ -181,6 +57,34 @@ namespace SelliT.Controllers
         #endregion
 
         #region Attribute-based Routing
+        /// GET api/invoices/GetAll
+        /// 
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            IList<Invoice> invoices = DbContext.Invoice.ToList();
+            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
+
+            var results =
+               from i in invoices
+               select new InvoiceViewModel
+               {
+                   ID = i.ID,
+                   Number = i.Number,
+                   PayForm = i.PayForm.ToString(),
+                   IsPaid = i.IsPaid,
+                   CreateDate = i.CreateDate,
+                   SaleDate = i.SaleDate,
+                   PaymentDate = i.PaymentDate,
+                   Contractor = GetContractorViewModel(i.ContractorID),
+                   Elements = GetInvoiceElementsViewModelList(i.ID)
+               };
+
+            return new JsonResult(results, DefaultJsonSettings);
+            //return this.Ok(Iresult);
+            //return new JsonResult(results, DefaultJsonSettings);
+        }
+
         /// <summary>
         /// GET: api/items/GetLatest
         /// ROUTING TYPE: attribute-based
@@ -274,8 +178,54 @@ namespace SelliT.Controllers
                 return 100;
             }
         }
+
+        private List<InvoiceElementsViewModel> GetInvoiceElementsViewModelList(string invoiceID)
+        {
+            IList<Product> products = DbContext.Product.ToList();
+            IList<InvoiceElement> elements = DbContext.InvoiceElement.ToList();
+            var lst = new List<InvoiceElementsViewModel>();
+            var results =
+               from e in elements
+               where e.InvoiceID == invoiceID
+               orderby e.PositionNumber
+               select new InvoiceElementsViewModel
+               {
+                   ID = e.ID,
+                   PositionNumber = e.PositionNumber,
+                   Quantity = e.Quantity,
+                   Product = GetProductViewModel(e.ProductID)
+               };
+
+            foreach (var r in results)
+                lst.Add(TinyMapper.Map<InvoiceElementsViewModel>(r));
+            return lst;
+        }
+
+
+        private ContractorViewModel GetContractorViewModel(string contractorID)
+        {
+            var contractor = DbContext.Contractor.Where(c => c.ID == contractorID).FirstOrDefault();
+            if (contractor == null)
+            {
+                return new ContractorViewModel();
+            }
+            else
+                return TinyMapper.Map<ContractorViewModel>(contractor);
+        }
+
+
+        private ProductViewModel GetProductViewModel(string productID)
+        {
+            var product = DbContext.Product.Where(c => c.ID == productID).FirstOrDefault();
+            if (product == null)
+            {
+                return null;
+            }
+            else
+                return TinyMapper.Map<ProductViewModel>(product);
+        }
         #endregion
 
-      
+
     }
 }

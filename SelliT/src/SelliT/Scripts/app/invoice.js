@@ -6,10 +6,11 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Invoice = (function () {
-                function Invoice(ID, Number, ContractorID, UserID, PayForm, CreateDate, SaleDate, PaymentDate, PaidDate) {
+                function Invoice(ID, Number, ContractorID, Contractor, UserID, PayForm, CreateDate, SaleDate, PaymentDate, PaidDate) {
                     this.ID = ID;
                     this.Number = Number;
                     this.ContractorID = ContractorID;
+                    this.Contractor = Contractor;
                     this.UserID = UserID;
                     this.PayForm = PayForm;
                     this.CreateDate = CreateDate;

@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", "./product.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./invoice.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", "./product.service"], funct
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, product_service_1;
+    var core_1, router_1, invoice_service_1;
     var InvoiceListComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(["@angular/core", "@angular/router", "./product.service"], funct
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (product_service_1_1) {
-                product_service_1 = product_service_1_1;
+            function (invoice_service_1_1) {
+                invoice_service_1 = invoice_service_1_1;
             }],
         execute: function() {
             InvoiceListComponent = (function () {
@@ -30,17 +30,17 @@ System.register(["@angular/core", "@angular/router", "./product.service"], funct
                     this.router = router;
                 }
                 InvoiceListComponent.prototype.ngOnInit = function () {
-                    this.getLatest();
+                    this.get();
                 };
-                InvoiceListComponent.prototype.getLatest = function () {
+                InvoiceListComponent.prototype.get = function () {
                     var _this = this;
-                    this.itemService.getLatest()
-                        .subscribe(function (items) { return _this.products = items; }, function (error) { return _this.errorInfo = error; });
+                    this.itemService.get()
+                        .subscribe(function (items) { return _this.invoices = items; }, function (error) { return _this.errorInfo = error; });
                 };
-                InvoiceListComponent.prototype.onSelect = function (product) {
-                    this.selectedProduct = product;
-                    console.log("Selected product with ID: " + this.selectedProduct.ID);
-                    this.router.navigate(['product', this.selectedProduct.ID]);
+                InvoiceListComponent.prototype.onSelect = function (item) {
+                    this.selectedInvoice = item;
+                    console.log("Selected invoice with ID: " + this.selectedInvoice.ID);
+                    this.router.navigate(['invoice', this.selectedInvoice.ID]);
                 };
                 __decorate([
                     core_1.Input(), 
@@ -49,10 +49,10 @@ System.register(["@angular/core", "@angular/router", "./product.service"], funct
                 InvoiceListComponent = __decorate([
                     core_1.Component({
                         selector: "invoice-list",
-                        template: "\n        <div id=\"list\">\n            <table id=\"items\">\n                <caption>Invoices</caption>\n                <tr>\n                    <th>Name</th>\n                    <th>Unit</th>\n                    <th>Price Netto [PLN]</th>\n                    <th>VAT [%]</th>\n                    <th>Price Brutto [PLN]</th>\n                </tr>\n                <tr *ngFor=\"let product of products\" (click) =\"onSelect(product)\">\n                    <td>{{product.Name}}</td>\n                    <td>{{product.Unit}}</td>\n                    <td>{{product.Price}}</td>\n                    <td>{{product.TaxRate}}</td>\n                    <td>{{product.PriceWithTax}}</td>\n                </tr>\n            </table>\n        <div>\n            ",
+                        template: "\n        <div id=\"list\">\n            <table id=\"items\">\n                <caption>Invoices</caption>\n                <tr>\n                    <th>Number</th>\n                    <th>Contractor Name</th>\n                    <th>Create Date</th>\n                    <th>Sale Date</th>\n                    <th>Pay Form</th>\n                    <th>Payment Date</th>\n                    <th>Paid Date</th>\n                </tr>\n                <tr *ngFor=\"let i of invoices\" (click) =\"onSelect(i)\">\n                    <td>{{i.Number}}</td>\n                    <td>{{i.Contractor.Name}}</td>\n                    <td>{{i.CreateDate}}</td>\n                    <td>{{i.SaleDate}}</td>\n                    <td>{{i.PayForm}}</td>\n                    <td>{{i.PaymentDate}}</td>\n                    <td>{{i.PaidDate}}</td>\n                </tr>\n            </table>\n        <div>\n            ",
                         styles: ["\n       #list {overflow-x:auto;}\n       #items {\n            border-collapse: collapse;\n            width: 100%;}\n       #items td, #items th, #items caption {\n            border: 1px solid #ddd;\n            padding: 8px;}\n       #items caption {\n            font-size: 1.2em;\n            font-weight: bold;\n            letter-spacing: 2px;}\n       #items tr:nth-child(even){background-color: #f2f2f2;}\n       #items tr:hover {background-color: #4db8ff;}\n       #items th, #items caption {\n            padding-top: 12px;\n            padding-bottom: 12px;\n            text-align: left;\n            background-color: black;\n            color: white;}\n    "]
                     }), 
-                    __metadata('design:paramtypes', [product_service_1.ProductService, router_1.Router])
+                    __metadata('design:paramtypes', [invoice_service_1.InvoiceService, router_1.Router])
                 ], InvoiceListComponent);
                 return InvoiceListComponent;
             }());

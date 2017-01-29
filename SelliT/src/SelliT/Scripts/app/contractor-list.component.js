@@ -30,11 +30,11 @@ System.register(["@angular/core", "@angular/router", "./contractor.service"], fu
                     this.router = router;
                 }
                 ContractorListComponent.prototype.ngOnInit = function () {
-                    this.getLatest();
+                    this.get();
                 };
-                ContractorListComponent.prototype.getLatest = function () {
+                ContractorListComponent.prototype.get = function () {
                     var _this = this;
-                    this.contractorService.getLatest()
+                    this.contractorService.get()
                         .subscribe(function (latestContractors) { return _this.contractors = latestContractors; }, function (error) { return _this.errorInfo = error; });
                 };
                 ContractorListComponent.prototype.onSelect = function (contractor) {

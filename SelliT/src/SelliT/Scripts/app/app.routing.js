@@ -1,7 +1,7 @@
-System.register(["@angular/router", "./contractor.component", "./contractor-detail.component", "./login.component", "./invoice.component", "./page-not-found.component", "./product.component", "./product-detail.component", "./user.component", "./user-detail.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./contractor.component", "./contractor-detail.component", "./login.component", "./invoice.component", "./invoice-detail.component", "./page-not-found.component", "./product.component", "./product-detail.component", "./user.component", "./user-detail.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, contractor_component_1, contractor_detail_component_1, login_component_1, invoice_component_1, page_not_found_component_1, product_component_1, product_detail_component_1, user_component_1, user_detail_component_1;
+    var router_1, contractor_component_1, contractor_detail_component_1, login_component_1, invoice_component_1, invoice_detail_component_1, page_not_found_component_1, product_component_1, product_detail_component_1, user_component_1, user_detail_component_1;
     var appRoutes, AppRoutingProviders, AppRouting;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(["@angular/router", "./contractor.component", "./contractor-deta
             },
             function (invoice_component_1_1) {
                 invoice_component_1 = invoice_component_1_1;
+            },
+            function (invoice_detail_component_1_1) {
+                invoice_detail_component_1 = invoice_detail_component_1_1;
             },
             function (page_not_found_component_1_1) {
                 page_not_found_component_1 = page_not_found_component_1_1;
@@ -46,16 +49,24 @@ System.register(["@angular/router", "./contractor.component", "./contractor-deta
                     redirectTo: ""
                 },
                 {
+                    path: "invoice",
+                    component: invoice_component_1.InvoiceComponent
+                },
+                {
+                    path: "invoice/:id",
+                    component: invoice_detail_component_1.InvoiceDetailComponent
+                },
+                {
+                    path: "invoice/:new",
+                    component: invoice_detail_component_1.InvoiceDetailComponent
+                },
+                {
                     path: "contractor",
                     component: contractor_component_1.ContractorComponent
                 },
                 {
                     path: "contractor/:id",
                     component: contractor_detail_component_1.ContractorDetailComponent
-                },
-                {
-                    path: "login",
-                    component: login_component_1.LoginComponent
                 },
                 {
                     path: "product",
@@ -72,6 +83,10 @@ System.register(["@angular/router", "./contractor.component", "./contractor-deta
                 {
                     path: "settings/:id",
                     component: user_detail_component_1.UserDetailComponent
+                },
+                {
+                    path: "login",
+                    component: login_component_1.LoginComponent
                 },
                 {
                     path: '**',

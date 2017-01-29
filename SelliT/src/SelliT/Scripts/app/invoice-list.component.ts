@@ -1,7 +1,7 @@
 ﻿import {Component, Input, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {Product} from "./product";
-import {ProductService} from "./product.service";
+import {Invoice} from "./invoice";
+import {InvoiceService} from "./invoice.service";
 
 @Component({
     selector: "invoice-list",
@@ -10,18 +10,22 @@ import {ProductService} from "./product.service";
             <table id="items">
                 <caption>Invoices</caption>
                 <tr>
-                    <th>Name</th>
-                    <th>Unit</th>
-                    <th>Price Netto [PLN]</th>
-                    <th>VAT [%]</th>
-                    <th>Price Brutto [PLN]</th>
+                    <th>Number</th>
+                    <th>Contractor Name</th>
+                    <th>Create Date</th>
+                    <th>Sale Date</th>
+                    <th>Pay Form</th>
+                    <th>Payment Date</th>
+                    <th>Paid Date</th>
                 </tr>
-                <tr *ngFor="let product of products" (click) ="onSelect(product)">
-                    <td>{{product.Name}}</td>
-                    <td>{{product.Unit}}</td>
-                    <td>{{product.Price}}</td>
-                    <td>{{product.TaxRate}}</td>
-                    <td>{{product.PriceWithTax}}</td>
+                <tr *ngFor="let i of invoices" (click) ="onSelect(i)">
+                    <td>{{i.Number}}</td>
+                    <td>{{i.Contractor.Name}}</td>
+                    <td>{{i.CreateDate}}</td>
+                    <td>{{i.SaleDate}}</td>
+                    <td>{{i.PayForm}}</td>
+                    <td>{{i.PaymentDate}}</td>
+                    <td>{{i.PaidDate}}</td>
                 </tr>
             </table>
         <div>
@@ -50,27 +54,27 @@ import {ProductService} from "./product.service";
 })
 
 export class InvoiceListComponent implements OnInit {
-    selectedProduct: Product;
+    selectedInvoice: Invoice;
     @Input() class: string;
-    products: Product[];
+    invoices: Invoice[];
     errorInfo: string;
 
-    constructor(private itemService: ProductService, private router: Router) { }
+    constructor(private itemService: InvoiceService, private router: Router) { }
 
     ngOnInit() {
-        this.getLatest();
+        this.get();
     }
 
-    getLatest() {
-        this.itemService.getLatest()
-            .subscribe(items => this.products = items,
+    get() {
+        this.itemService.get()
+            .subscribe(items => this.invoices = items,
             error => this.errorInfo = <any>error
             );
     }
 
-    onSelect(product: Product) {
-        this.selectedProduct = product;
-        console.log("Selected product with ID: " + this.selectedProduct.ID);
-        this.router.navigate(['product', this.selectedProduct.ID]);
+    onSelect(item: Invoice) {
+        this.selectedInvoice = item;
+        console.log("Selected invoice with ID: " + this.selectedInvoice.ID);
+        this.router.navigate(['invoice', this.selectedInvoice.ID]);
     }
 }

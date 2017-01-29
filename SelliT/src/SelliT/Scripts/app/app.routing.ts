@@ -4,6 +4,7 @@ import {ContractorComponent} from "./contractor.component";
 import {ContractorDetailComponent} from "./contractor-detail.component";
 import {LoginComponent} from "./login.component";
 import {InvoiceComponent} from "./invoice.component";
+import {InvoiceDetailComponent} from "./invoice-detail.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {ProductComponent} from "./product.component";
 import {ProductDetailComponent} from "./product-detail.component";
@@ -20,16 +21,24 @@ const appRoutes: Routes = [
         redirectTo: ""
     },
     {
+        path: "invoice",
+        component: InvoiceComponent
+    },
+    {
+        path: "invoice/:id",
+        component: InvoiceDetailComponent
+    },
+    {
+        path: "invoice/:new",
+        component: InvoiceDetailComponent
+    },
+    {
         path: "contractor",
         component: ContractorComponent
     },
     {
         path: "contractor/:id",
         component: ContractorDetailComponent
-    },
-    {
-        path: "login",
-        component: LoginComponent
     },
     {
         path: "product",
@@ -46,6 +55,10 @@ const appRoutes: Routes = [
     {
         path: "settings/:id",
         component: UserDetailComponent
+    },
+    {
+        path: "login",
+        component: LoginComponent
     },
     {
         path: '**',

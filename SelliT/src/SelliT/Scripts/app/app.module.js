@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./app.routing", "./app.component", "./contractor.component", "./contractor-detail.component", "./contractor-list.component", "./invoice.component", "./contractor.service", "./product.component", "./product-detail.component", "./product-list.component", "./product.service", "./login.component", "./page-not-found.component", "./user.component", "./user-detail.component", "./user-list.component", "./user.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./app.routing", "./app.component", "./contractor.component", "./contractor-detail.component", "./contractor-list.component", "./invoice.component", "./invoice-detail.component", "./invoice-list.component", "./invoice.service", "./contractor.service", "./product.component", "./product-detail.component", "./product-list.component", "./product.service", "./login.component", "./page-not-found.component", "./user.component", "./user-detail.component", "./user-list.component", "./user.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, platform_browser_1, http_1, forms_1, router_1, app_routing_1, app_component_1, contractor_component_1, contractor_detail_component_1, contractor_list_component_1, invoice_component_1, contractor_service_1, product_component_1, product_detail_component_1, product_list_component_1, product_service_1, login_component_1, page_not_found_component_1, user_component_1, user_detail_component_1, user_list_component_1, user_service_1;
+    var core_1, platform_browser_1, http_1, forms_1, router_1, app_routing_1, app_component_1, contractor_component_1, contractor_detail_component_1, contractor_list_component_1, invoice_component_1, invoice_detail_component_1, invoice_list_component_1, invoice_service_1, contractor_service_1, product_component_1, product_detail_component_1, product_list_component_1, product_service_1, login_component_1, page_not_found_component_1, user_component_1, user_detail_component_1, user_list_component_1, user_service_1;
     var AppModule;
     return {
         setters:[
@@ -47,6 +47,15 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
             },
             function (invoice_component_1_1) {
                 invoice_component_1 = invoice_component_1_1;
+            },
+            function (invoice_detail_component_1_1) {
+                invoice_detail_component_1 = invoice_detail_component_1_1;
+            },
+            function (invoice_list_component_1_1) {
+                invoice_list_component_1 = invoice_list_component_1_1;
+            },
+            function (invoice_service_1_1) {
+                invoice_service_1 = invoice_service_1_1;
             },
             function (contractor_service_1_1) {
                 contractor_service_1 = contractor_service_1_1;
@@ -94,6 +103,8 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                             contractor_list_component_1.ContractorListComponent,
                             contractor_detail_component_1.ContractorDetailComponent,
                             invoice_component_1.InvoiceComponent,
+                            invoice_detail_component_1.InvoiceDetailComponent,
+                            invoice_list_component_1.InvoiceListComponent,
                             product_component_1.ProductComponent,
                             product_list_component_1.ProductListComponent,
                             product_detail_component_1.ProductDetailComponent,
@@ -114,8 +125,9 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                         // providers
                         providers: [
                             contractor_service_1.ContractorService,
+                            invoice_service_1.InvoiceService,
                             product_service_1.ProductService,
-                            user_service_1.UserService
+                            user_service_1.UserService,
                         ],
                         bootstrap: [
                             app_component_1.AppComponent

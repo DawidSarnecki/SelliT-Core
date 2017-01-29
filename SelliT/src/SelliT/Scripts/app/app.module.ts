@@ -13,6 +13,9 @@ import {ContractorComponent} from "./contractor.component";
 import {ContractorDetailComponent} from "./contractor-detail.component";
 import {ContractorListComponent} from "./contractor-list.component";
 import {InvoiceComponent} from "./invoice.component";
+import {InvoiceDetailComponent} from "./invoice-detail.component";
+import {InvoiceListComponent} from "./invoice-list.component";
+import {InvoiceService} from "./invoice.service";
 import {ContractorService} from "./contractor.service";
 import {ProductComponent} from "./product.component";
 import {ProductDetailComponent} from "./product-detail.component";
@@ -34,6 +37,8 @@ import {UserService} from "./user.service";
         ContractorListComponent,
         ContractorDetailComponent,
         InvoiceComponent,
+        InvoiceDetailComponent,
+        InvoiceListComponent,
         ProductComponent,
         ProductListComponent,
         ProductDetailComponent,
@@ -56,8 +61,9 @@ import {UserService} from "./user.service";
     // providers
     providers: [
         ContractorService,
+        InvoiceService,
         ProductService,
-        UserService
+        UserService,
 
     ],
     bootstrap: [

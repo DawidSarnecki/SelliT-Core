@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using SelliT.Data.Invoices;
-using SelliT.Data.Products;
 
 namespace SelliT.ViewModels
 {
@@ -24,6 +22,7 @@ namespace SelliT.ViewModels
         public string ID { get; set; }
         public string InvoiceID { get; set; }
         public string ProductID { get; set; }
+        public ProductViewModel Product { get; set;}
         public int PositionNumber { get; set; }
         public int Quantity { get; set; }
         public DateTime CreateDate { get; set; }

@@ -26,18 +26,13 @@ namespace SelliT.ViewModels
         public string PayForm { get; set; }
         public bool IsPaid { get; set; }
         public string UserId { get; set; }
-        public IList<ContractorViewModel> Contractor { get; set; }
+        public ContractorViewModel Contractor { get; set; }
         public IList<InvoiceElementsViewModel> Elements { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime SaleDate { get; set; }
         public DateTime PaymentDate { get; set; }
         public DateTime ModifydDate { get; set; }
         public DateTime RemoveDate { get; set; }
-        public string SumoOfID
-        {
-            get { return ContractorID + ", " + ID; }
-        }
-  
         public string test
         {
             get { return "test"; }

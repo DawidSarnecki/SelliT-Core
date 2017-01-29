@@ -1,6 +1,8 @@
 ﻿import {Component, Input, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Invoice} from "./invoice";
+import {InvoiceService} from "./invoice.service";
+
 @Component({
     selector: "invoice-detail",
     template: `
@@ -18,16 +20,6 @@ import {Invoice} from "./invoice";
               <div class="col-xs-6">
                 <div class="invoice-number-container">
                   <label for="invoice-number">Invoice #</label><input type="text" id="invoice-number" ng-model="invoice.invoice_number" />
-                </div>
-              </div>
-              <div class="col-xs-6 logo-container">
-                <input type="file" id="imgInp" />
-                <img ng-hide="logoRemoved" id="company_logo" ng-src="{{ logo }}" alt="your image" width="300" />
-                <div>
-                  <div class="noPrint" ng-hide="printMode">
-                    <a ng-click="editLogo()" href >Edit Logo</a>
-                    <a ng-click="toggleLogo()" id="remove_logo" href >{{ logoRemoved ? 'Show' : 'Hide' }} logo</a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -103,6 +95,34 @@ import {Invoice} from "./invoice";
 `
 })
 export class InvoiceDetailComponent {
-    title = "Invoice";
+    invoice: Invoice;
+
+    constructor(
+        private itemService: InvoiceService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute)
+    { }
+
+    ngOnInit() {
+        var id = this.activatedRoute.snapshot.params['id'];
+        console.log("id: " + id);
+        if (id == "new") {
+            console.log("inserting a new Invoice");
+            this.invoice = new Invoice(id, "New Number", null, null,null, null, null, null, null, null);
+        }
+        else if (id) {
+            this.itemService.get(id)
+                .subscribe(item => this.invoice = item);
+        }
+        else {
+            console.log("Invalid id: ");
+            this.router.navigate(["invoices"]);
+        }
+    }
+
+    onBack() {
+        this.router.navigate(["invoice"]);
+    }
+
 
 }
